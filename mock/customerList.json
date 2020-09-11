@@ -1,0 +1,78 @@
+{
+    "entity": "collection",
+    "count": 5,
+    "items": [
+        {
+            "id": "cust_FYvnyL2oTzJg6D",
+            "entity": "customer",
+            "name": "Neeraj Kumar Singh",
+            "email": "neeraj.singh@example.com",
+            "contact": "9876543210",
+            "gstin": null,
+            "notes": [],
+            "shipping_address": [
+                {
+                    "id": "addr_FYvnyN8AkVSHL0",
+                    "type": "shipping_address",
+                    "primary": true,
+                    "line1": "3rd FLoor, Nakamura Tower, Bomaye Boulevard",
+                    "line2": "Baker Street",
+                    "zipcode": "560001",
+                    "city": "Bangalore",
+                    "state": "Karnataka",
+                    "country": "in"
+                }
+            ],
+            "created_at": 1599217832
+        },
+        {
+            "id": "cust_FYUmCriA04Acfc",
+            "entity": "customer",
+            "name": "Shivam Murmu",
+            "email": "shivam.murmu@example.com",
+            "contact": "9123456780",
+            "gstin": "12ABCDE2356F7GH",
+            "notes": {
+                "notes_key_1": "Tea, Earl Grey, Hot",
+                "notes_key_2": "Tea, Earl Grey… decaf."
+            },
+            "created_at": 1599122648
+        },
+        {
+            "id": "cust_FYUlZUchn8c3yp",
+            "entity": "customer",
+            "name": "Neeraj Kumar Singh",
+            "email": "neeraj.singh@example.com",
+            "contact": "9123456780",
+            "gstin": "12ABCDE2356F7GH",
+            "notes": {
+                "notes_key_1": "Tea, Earl Grey, Hot",
+                "notes_key_2": "Tea, Earl Grey… decaf."
+            },
+            "created_at": 1599122612
+        },
+        {
+            "id": "cust_FXrGPQSxf3QXn5",
+            "entity": "customer",
+            "name": "Gaurav Kumar",
+            "email": "gaurav.kumar@example.com",
+            "contact": "9123456780",
+            "gstin": "12ABCDE2356F7GH",
+            "notes": {
+                "notes_key_1": "Tea, Earl Grey, Hot",
+                "notes_key_2": "Tea, Earl Grey… decaf."
+            },
+            "created_at": 1598983499
+        },
+        {
+            "id": "cust_FXl29kbBrJFpSv",
+            "entity": "customer",
+            "name": "Sonam Gupta",
+            "email": "gupta@razorpay.com",
+            "contact": "9090909090",
+            "gstin": null,
+            "notes": [],
+            "created_at": 1598961560
+        }
+    ]
+}
