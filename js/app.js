@@ -23,12 +23,6 @@ class BlueButton extends React.Component {
     constructor(props) {
         super(props);
     }
-    checkVisibility() {
-        if (this.props.content_choice === 'list')
-            return "visible";
-        else 
-            return "hidden";
-    }
     renderButtonName() {
         if (this.props.sidebar_choice && this.props.content_choice) {
             if (this.props.sidebar_choice === 'items')
@@ -41,7 +35,7 @@ class BlueButton extends React.Component {
         this.props.changeContentChoice(event, 'create');
     }
     render() {
-        return <button id="button" value="" style={{visibility: this.checkVisibility()}} onClick={event => this.handleButtonClick(event)}>
+        return <button id="button" value="" onClick={event => this.handleButtonClick(event)}>
             {this.renderButtonName()}
         </button>;
     }
@@ -56,9 +50,17 @@ function TopPanel(props) {
                 return <h1 id="title">New {props.sidebar_choice.charAt(0).toUpperCase() + props.sidebar_choice.slice(1, props.sidebar_choice.length - 1)}</h1>
         }
     }
+    function renderButton() {
+        if (props.sidebar_choice && props.content_choice) {
+            if (props.content_choice === 'list') 
+                return <BlueButton sidebar_choice={props.sidebar_choice} content_choice={props.content_choice} changeContentChoice={props.changeContentChoice}/>
+            else
+                null;
+        }
+    }
     return <div className="top-panel">
         {renderTitle()}
-        <BlueButton sidebar_choice={props.sidebar_choice} content_choice={props.content_choice} changeContentChoice={props.changeContentChoice}/>
+        {renderButton()}
     </div>;
 }
 
@@ -122,7 +124,7 @@ class Table extends React.Component {
                         <th>CREATED ON</th>
                     </tr>
                         {items.map(customer => (
-                            <tr>
+                            <tr key={customer.id}>
                                 <td>{customer.name}</td>
                                 <td>{customer.contact}</td>
                                 <td>{customer.email}</td>
@@ -141,7 +143,7 @@ class Table extends React.Component {
                         <th>ADDED ON</th>
                     </tr>
                         {items.map(item => (
-                            <tr>
+                            <tr key={item.id}>
                                 <td>{item.name}</td>
                                 <td>{item.description}</td>
                                 <td>₹{item.amount / 100}</td>
@@ -161,7 +163,7 @@ class Table extends React.Component {
                         <th>AMOUNT DUE</th>
                     </tr>
                         {items.map(invoice => (
-                            <tr>
+                            <tr key={invoice.id}>
                                 <td>{transformDate(invoice.date)}</td>                                    
                                 <td>{invoice.customer_details ? invoice.customer_details.name : ''}</td>
                                 <td>{invoice.status === 'PAID' ? <mark className="paid">{invoice.status} </mark> : <mark> {invoice.status} </mark>}</td>
@@ -217,13 +219,6 @@ class Content extends React.Component{
     }
 }
 
-function SideBar(props) {
-    const arr = ["Customers", "Items", "Invoices"];
-    return <div className="side-bar">
-        {arr.map(el => <SideBarItem value={el} cls={el.toLowerCase().concat(props.sidebar_choice === el.toLowerCase() ? ' active' : '')}  changeSidebarChoice={props.changeSidebarChoice}/>)}
-    </div>;
-}
-
 class OutsideBox extends React.Component{
     constructor(props) {
         super(props);
@@ -240,10 +235,13 @@ class OutsideBox extends React.Component{
         //     content_choice: 'list'
         // });
     }
-    render(){
+    render() {
+        const arr = ["Customers", "Items", "Invoices"];
         return(
             <div className="outside-box">
-                <SideBar sidebar_choice={this.state.sidebar_choice} changeSidebarChoice={this.changeSidebarChoice}/>
+                <div className="side-bar">
+                    {arr.map(el => <SideBarItem key={el} value={el} cls={el.toLowerCase().concat(this.state.sidebar_choice === el.toLowerCase() ? ' active' : '')}  changeSidebarChoice={this.changeSidebarChoice}/>)}
+                </div>
                 <Content sidebar_choice={this.state.sidebar_choice}/>
             </div>
         );
