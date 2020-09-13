@@ -197,23 +197,23 @@ class Content extends React.Component{
             });
         }
     }
-    render() {
+    handleContent() {
         if (this.props.sidebar_choice && this.state.content_choice) {
-            if (this.state.content_choice === 'list') 
-                return <div className="content">
-                    <TopPanel sidebar_choice={this.props.sidebar_choice} content_choice={this.state.content_choice} changeContentChoice={this.changeContentChoice}/>
-                    <Table sidebar_choice={this.props.sidebar_choice}/>
-                </div>;
+            if (this.state.content_choice === 'list')
+                return <Table sidebar_choice={this.props.sidebar_choice}/>;
             else if (this.props.sidebar_choice === 'customers')
                 return <Customers/>;
-            // else if (this.props.sidebar_choice === 'items')
-            //     return <Items/>;
-            // else if (this.props.sidebar_choice === 'invoices')
-            //     return <Invoices/>;
-            else null;
+            else
+                return null;
         }
         else
             return null;
+    }
+    render() {
+        return <div className="content">
+            <TopPanel sidebar_choice={this.props.sidebar_choice} content_choice={this.state.content_choice} changeContentChoice={this.changeContentChoice}/>
+            {this.handleContent()}
+        </div>;
     }
 }
 
