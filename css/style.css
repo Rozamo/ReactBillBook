@@ -34,9 +34,10 @@ body {
 
 .side-bar > div {
     font-size: 20px;
-    text-align: center;
+    text-align: left;
     padding: 5%;
     background-color: white;
+    border-left: 5px solid white;
 }
 
 .side-bar > div:hover {
