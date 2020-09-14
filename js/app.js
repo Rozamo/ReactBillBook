@@ -111,7 +111,7 @@ class OutsideBox extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            sidebar_choice: "invoices"
+            sidebar_choice: "customers"
         };
     }
     changeSidebarChoice = (sidebar_choice) => {
