@@ -132,3 +132,31 @@ select {
 #add-item:hover{
     cursor: pointer;
 }
+
+input, label {
+    display: block;
+    width: 100%;
+    margin-right: 7%;
+    font-size: medium;
+    height: 40px;
+}
+
+/* input {
+    margin-top: 10px;
+} */
+
+label {
+    margin-bottom: 10px;
+}
+
+.customer-form {
+    background-color: white;
+    padding: 5%;
+    margin-top: 25px;
+}
+
+.cust-panel-1 {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}

@@ -8,15 +8,15 @@ function transformDate(date) {
 }
 
 function SideBarItem(props) {
-    const handleSidebarClick = (event, sidebar_choice) => {
+    const handleSidebarClick = (sidebar_choice) => {
         // if (sidebar_choice.includes('active'))
         //     props.changeSidebarChoice(event, sidebar_choice.replace(' active', ''));
         // else
         //     props.changeSidebarChoice(event, sidebar_choice);
         if (!sidebar_choice.includes('active'))
-            props.changeSidebarChoice(event, sidebar_choice);
+            props.changeSidebarChoice(sidebar_choice);
     }
-    return <div className={props.cls} onClick={event => handleSidebarClick(event, props.cls)}>{props.value}</div>;
+    return <div className={props.cls} onClick={() => handleSidebarClick(props.cls)}>{props.value}</div>;
 }
 
 class BlueButton extends React.Component {
@@ -30,12 +30,19 @@ class BlueButton extends React.Component {
             else
                 return `Create ${this.props.sidebar_choice.charAt(0).toUpperCase() + this.props.sidebar_choice.slice(1, this.props.sidebar_choice.length - 1)}`
         }
+        return "Save Customer";
     }
     handleButtonClick = (event) => {
-        this.props.changeContentChoice(event, 'create');
+        if (this.props.sidebar_choice && this.props.content_choice) {
+            if (this.props.content_choice === 'list')
+                this.props.changeContentChoice('create');
+            else
+                this.props.handleSubmit(event);
+        }
+        return null;
     }
     render() {
-        return <button id="button" value="" onClick={event => this.handleButtonClick(event)}>
+        return <button type={this.props.type} id="button" value="" onClick={this.handleButtonClick}>
             {this.renderButtonName()}
         </button>;
     }
@@ -49,135 +56,19 @@ function TopPanel(props) {
             else
                 return <h1 id="title">New {props.sidebar_choice.charAt(0).toUpperCase() + props.sidebar_choice.slice(1, props.sidebar_choice.length - 1)}</h1>
         }
+        return null;
     }
     function renderButton() {
         if (props.sidebar_choice && props.content_choice) {
             if (props.content_choice === 'list') 
                 return <BlueButton sidebar_choice={props.sidebar_choice} content_choice={props.content_choice} changeContentChoice={props.changeContentChoice}/>
-            else
-                null;
         }
+        return null;
     }
     return <div className="top-panel">
         {renderTitle()}
         {renderButton()}
     </div>;
-}
-
-class Table extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            error: null,
-            isLoaded: false,
-            items: []
-        };
-        
-    }
-    getData = async () => {
-        get_req.abort();
-        get_req = new AbortController();
-        try {
-            const response = await fetch(`https://rzp-training.herokuapp.com/team2/${this.props.sidebar_choice}`, { signal: get_req.signal });
-            const data = await response.json();
-            this.setState({
-                isLoaded: true,
-                items: data.items
-            });
-        }
-        catch (error) {
-            if (error.name === 'AbortError')
-                return;
-            this.setState({
-                error,
-                isLoaded: true
-            });
-        }
-    }
-    componentDidMount() {
-        this.getData();
-    }
-    componentDidUpdate(prevProp) {
-        if (this.props.sidebar_choice != prevProp.sidebar_choice) {
-            this.setState({
-                isLoaded: false,
-                items: []
-            });
-            this.getData();
-        }
-    }
-    render(){
-        const { error, isLoaded, items } = this.state;
-        if (error) {
-            return <div>Error: {error.message}</div>;
-        } 
-        else if (!isLoaded) {
-            return <img src="images/load.gif" alt="Loading...." id="load-img"></img>;
-        } 
-        else if (this.props.sidebar_choice === 'customers') 
-            return <table className="inv-table" id="inv-table">
-                <tbody>
-                    <tr>
-                        <th>NAME</th>
-                        <th>PHONE</th>
-                        <th>EMAIL</th>
-                        <th>CREATED ON</th>
-                    </tr>
-                        {items.map(customer => (
-                            <tr key={customer.id}>
-                                <td>{customer.name}</td>
-                                <td>{customer.contact}</td>
-                                <td>{customer.email}</td>
-                                <td>{transformDate(customer.created_at)}</td>
-                            </tr>
-                        ))}
-                </tbody>
-            </table>;
-        else if (this.props.sidebar_choice === 'items') 
-            return <table className="inv-table" id="inv-table">
-                <tbody>
-                    <tr>
-                        <th>NAME</th>
-                        <th style={{width: "50%"}}>DESCRIPTION</th>
-                        <th>PRICE</th>
-                        <th>ADDED ON</th>
-                    </tr>
-                        {items.map(item => (
-                            <tr key={item.id}>
-                                <td>{item.name}</td>
-                                <td>{item.description}</td>
-                                <td>₹{item.amount / 100}</td>
-                                <td>{transformDate(item.created_at)}</td>
-                            </tr>
-                        ))}
-                </tbody>
-            </table>;
-        else if (this.props.sidebar_choice === 'invoices')
-            return <table className="inv-table" id="inv-table">
-                <tbody>
-                    <tr>
-                        <th>DATE</th>
-                        <th>CUSTOMER</th>
-                        <th>PAID STATUS</th>
-                        <th>AMOUNT</th>
-                        <th>AMOUNT DUE</th>
-                    </tr>
-                        {items.map(invoice => (
-                            <tr key={invoice.id}>
-                                <td>{transformDate(invoice.date)}</td>                                    
-                                <td>{invoice.customer_details ? invoice.customer_details.name : ''}</td>
-                                <td>{invoice.status === 'PAID' ? <mark className="paid">{invoice.status} </mark> : <mark> {invoice.status} </mark>}</td>
-                                <td>₹{invoice.amount / 100}</td>
-                                <td>{invoice.amount_due ? "₹"+invoice.amount_due : 0}</td>
-                            </tr>
-                        ))}
-                </tbody>
-            </table>;
-    }
-}
-
-function Customers() {
-    return <h1>Create Customer</h1>;
 }
 
 class Content extends React.Component{
@@ -187,7 +78,7 @@ class Content extends React.Component{
             content_choice: 'list'
         }
     }
-    changeContentChoice = (event, content_choice) => {
+    changeContentChoice = (content_choice) => {
         this.setState({
             content_choice: content_choice
         }, () => {console.log(this.state);});
@@ -204,12 +95,9 @@ class Content extends React.Component{
             if (this.state.content_choice === 'list')
                 return <Table sidebar_choice={this.props.sidebar_choice}/>;
             else if (this.props.sidebar_choice === 'customers')
-                return <Customers/>;
-            else
-                return null;
+                return <Customers sidebar_choice={this.props.sidebar_choice} changeContentChoice={this.changeContentChoice}/>;
         }
-        else
-            return null;
+        return null;
     }
     render() {
         return <div className="content">
@@ -226,7 +114,7 @@ class OutsideBox extends React.Component{
             sidebar_choice: "invoices"
         };
     }
-    changeSidebarChoice = (event, sidebar_choice) => {
+    changeSidebarChoice = (sidebar_choice) => {
         this.setState({
             sidebar_choice: sidebar_choice
         }, () => {console.log(this.state);});
