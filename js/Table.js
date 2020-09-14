@@ -102,7 +102,7 @@ class Table extends React.Component {
                                 <td>{invoice.customer_details ? invoice.customer_details.name : ''}</td>
                                 <td>{invoice.status === 'PAID' ? <mark className="paid">{invoice.status} </mark> : <mark> {invoice.status} </mark>}</td>
                                 <td>₹{invoice.amount / 100}</td>
-                                <td>{invoice.amount_due ? "₹"+invoice.amount_due : 0}</td>
+                                <td>{invoice.amount_due ? "₹"+(invoice.amount_due / 100) : 0}</td>
                             </tr>
                         ))}
                 </tbody>
