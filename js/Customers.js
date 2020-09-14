@@ -1,19 +1,20 @@
 'use strict';
 
-// async function PostForm(object, sidebar_choice) {
-//     try {
-//         const response = await fetch(`https://rzp-training.herokuapp.com/team2/${sidebar_choice}`, { 
-//             method: "POST", body: JSON.stringify(object), headers: { "Content-type": "application/json; charset=UTF-8"}
-//         });
-//         const data = await response.json();
-//         console.log(data);
-//         return data;
-//     }
-//     catch (error) {
-//         console.log(error);
-//         return error;
-//     }
-// }
+async function PostForm(obj, sidebar_choice, changeContentChoice) {
+    try {
+        const response = await fetch(`https://rzp-training.herokuapp.com/team2/${sidebar_choice}`, { 
+            method: "POST", body: JSON.stringify(obj), headers: { "Content-type": "application/json; charset=UTF-8"}
+        });
+        const data = await response.json();
+        if (data.statusCode !== 400) {
+            changeContentChoice('list'); }
+        else 
+            alert(data.error.description);
+    }
+    catch (error) {
+        alert(error);
+    }
+}
 
 class Customers extends React.Component {
     constructor(props) {
@@ -24,24 +25,9 @@ class Customers extends React.Component {
             email: '',
         };
     }
-    async postForm() {
-        try {
-            const response = await fetch(`https://rzp-training.herokuapp.com/team2/${this.props.sidebar_choice}`, { 
-                method: "POST", body: JSON.stringify(this.state), headers: { "Content-type": "application/json; charset=UTF-8"}
-            });
-            const data = await response.json();
-            if (data.statusCode !== 400) {
-                this.props.changeContentChoice('list'); }
-            else 
-                alert(data.error.description);
-        }
-        catch (error) {
-            alert(error);
-        }
-    }
     handleSubmit = (event) => {
         document.getElementById("button").disabled = true;
-        this.postForm();
+        PostForm(this.state, this.props.sidebar_choice, this.props.changeContentChoice);
         document.getElementById("button").disabled = false;
         event.preventDefault();
     }
