@@ -40,14 +40,15 @@ class Table extends React.Component {
             this.getData();
         }
     }
+    componentWillUnmount() {
+        get_req.abort();
+    }
     render(){
         const { error, isLoaded, items } = this.state;
-        if (error) {
+        if (error)
             return <div>Error: {error.message}</div>;
-        } 
-        else if (!isLoaded) {
+        else if (!isLoaded)
             return <img src="images/load.gif" alt="Loading...." id="load-img"></img>;
-        } 
         else if (this.props.sidebar_choice === 'customers') 
             return <table className="inv-table" id="inv-table">
                 <tbody>

@@ -1,6 +1,7 @@
 'use strict';
 
 let get_req = new AbortController();
+let save_req = new AbortController();
 
 function transformDate(date) {
     const newDate = new Date(date * 1000);
@@ -123,13 +124,13 @@ class OutsideBox extends React.Component{
         };
     }
     changeSidebarChoice = (sidebar_choice) => {
-        this.setState({
-            sidebar_choice: sidebar_choice
-        }, () => {console.log(this.state);});
         // this.setState({
-        //     sidebar_choice: sidebar_choice,
-        //     content_choice: 'list'
-        // });
+        //     sidebar_choice: sidebar_choice
+        // }, () => {console.log(this.state);});
+        this.setState({
+            sidebar_choice: sidebar_choice,
+            content_choice: 'list'
+        });
     }
     render() {
         const arr = ["Customers", "Items", "Invoices"];
