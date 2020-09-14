@@ -25,18 +25,21 @@ class BlueButton extends React.Component {
     }
     renderButtonName() {
         if (this.props.sidebar_choice && this.props.content_choice) {
-            if (this.props.sidebar_choice === 'items')
-                return "Add Item";
-            else
-                return `Create ${this.props.sidebar_choice.charAt(0).toUpperCase() + this.props.sidebar_choice.slice(1, this.props.sidebar_choice.length - 1)}`
+            if (this.props.content_choice === 'list') {
+                if (this.props.sidebar_choice === 'items')
+                    return "Add Item";
+                else
+                    return `Create ${this.props.sidebar_choice.charAt(0).toUpperCase() + this.props.sidebar_choice.slice(1, this.props.sidebar_choice.length - 1)}`
+            }
+            else if (this.props.content_choice === 'create') 
+                return `Save ${this.props.sidebar_choice.charAt(0).toUpperCase()}${this.props.sidebar_choice.slice(1, this.props.sidebar_choice.length - 1)}`;
         }
-        return "Save Customer";
     }
     handleButtonClick = (event) => {
         if (this.props.sidebar_choice && this.props.content_choice) {
             if (this.props.content_choice === 'list')
                 this.props.changeContentChoice('create');
-            else
+            else if (this.props.content_choice === 'create')
                 this.props.handleSubmit(event);
         }
         return null;
@@ -79,9 +82,12 @@ class Content extends React.Component{
         }
     }
     changeContentChoice = (content_choice) => {
+        // this.setState({
+        //     content_choice: content_choice
+        // }, () => {console.log(this.state);});
         this.setState({
             content_choice: content_choice
-        }, () => {console.log(this.state);});
+        });
     }
     componentDidUpdate(prevProp) {
         if (this.props.sidebar_choice != prevProp.sidebar_choice) {
@@ -95,7 +101,9 @@ class Content extends React.Component{
             if (this.state.content_choice === 'list')
                 return <Table sidebar_choice={this.props.sidebar_choice}/>;
             else if (this.props.sidebar_choice === 'customers')
-                return <Customers sidebar_choice={this.props.sidebar_choice} changeContentChoice={this.changeContentChoice}/>;
+                return <Customers sidebar_choice={this.props.sidebar_choice} content_choice={this.state.content_choice} changeContentChoice={this.changeContentChoice}/>;
+            else if (this.props.sidebar_choice === 'items')
+                return <Items sidebar_choice={this.props.sidebar_choice} content_choice={this.state.content_choice} changeContentChoice={this.changeContentChoice}/>;
         }
         return null;
     }
@@ -111,7 +119,7 @@ class OutsideBox extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            sidebar_choice: "customers"
+            sidebar_choice: "invoices"
         };
     }
     changeSidebarChoice = (sidebar_choice) => {

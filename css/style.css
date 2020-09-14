@@ -71,7 +71,8 @@ body {
     border-radius: 5px;
     border: none;
     /* width: 10em; */
-    min-width: 20%;
+    min-width: 200px;
+    min-height: 37px;
     position: relative;
 }
 

@@ -6,10 +6,10 @@ async function PostForm(obj, sidebar_choice, changeContentChoice) {
             method: "POST", body: JSON.stringify(obj), headers: { "Content-type": "application/json; charset=UTF-8"}
         });
         const data = await response.json();
-        if (data.entity === sidebar_choice.slice(0, sidebar_choice.length - 1))
-            changeContentChoice('list');
-        else if (data.statusCode === 400)
+        if (data.statusCode === 400)
             alert(data.error.description);
+        else if (data.entity === sidebar_choice.slice(0, sidebar_choice.length - 1) || data.id)
+            changeContentChoice('list');
         else
             alert(data);
     }
@@ -46,7 +46,7 @@ class Customers extends React.Component {
             <label htmlFor="email">Email</label>
             <div className="cust-panel-1">
                 <input value={this.state.email} type="email" name="email" onChange={(event) => {this.setState({email: event.target.value})}}/>
-                <BlueButton type="submit" handleSubmit={this.handleSubmit}/>
+                <BlueButton type="submit" sidebar_choice={this.props.sidebar_choice} content_choice={this.props.content_choice} handleSubmit={this.handleSubmit}/>
             </div>
         </form>;
     }
