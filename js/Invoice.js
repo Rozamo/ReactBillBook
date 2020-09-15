@@ -31,15 +31,15 @@ class CustomerSelect extends React.Component {
       }
     
     handleClick=()=>{
-        this.setState({showDDL:true})
+        this.setState({showDDL:true});
     }
 
-    handleChange(event){
+    handleChange(event,changeCustomerDetails){
         let idx=event.target.value;
         this.setState({
             chosenCustomer: this.state.items[idx],
             showDDL:false
-        })
+        },()=>changeCustomerDetails(this.state.chosenCustomer));
     }
 
     render() {
@@ -57,7 +57,7 @@ class CustomerSelect extends React.Component {
             if(!this.state.isLoaded)return 'Loading...';
             return(
                 <div className="inv-cust-det">
-                    <select className="customer_ddl" id="cust_list" defaultValue="Choose Customer" onChange={()=>this.handleChange(event)}>
+                    <select className="customer_ddl" id="cust_list" defaultValue="Choose Customer" onChange={()=>this.handleChange(event,this.props.changeCustomerDetails)}>
                         <option value="Choose Customer">Choose Customer</option>
                         {
                             this.state.items.map((customer,index)=>(
@@ -88,15 +88,15 @@ class Panel1 extends React.Component {
             <div className="panel-1">
                 <div className="inv-cust-panel">
                     <div style={{color: "rgb(125,123,123)"}}>Bill to</div>
-                    <CustomerSelect/>
+                    <CustomerSelect changeCustomerDetails={this.props.changeCustomerDetails}/>
                 </div>
                 <div>
                     <label>Issued at</label>
-                    <input type="date" id="issued-at" name="issued-at"></input>
+                    <input onChange={()=>this.props.changeDate(event.target.value)} type="date" id="issued-at" name="issued-at"></input>
                 </div>
                 <div>
                     <label>Due-Date</label>
-                    <input type="date" id="due-date" name="due-date"></input>
+                    <input onChange={()=>this.props.changeExpirebyDate(event.target.value)} type="date" id="due-date" name="due-date"></input>
                 </div>
             </div>
          );
@@ -109,7 +109,7 @@ class Panel2 extends React.Component {
             <div className="panel-2">
                 <div className="notes">
                     <div className="inv-description">
-                        <textarea id="description" cols="30" rows="10" placeholder="Write the description here"></textarea>
+                        <textarea onChange={()=>this.props.changeNotes(event.target.value)} id="description" cols="30" rows="10" placeholder="Write the description here"></textarea>
                     </div>
                 </div>
                 <div className="item-total" id="inv-items-list">
@@ -280,18 +280,6 @@ class ItemPanel extends React.Component {
     }
 }
 
-class CreateList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {  }
-    }
-    render() { 
-        return ( 
-            <Panel1/>
-         );
-    }
-}
-
 class Invoice extends React.Component{
     constructor(props) {
         super(props);
@@ -301,7 +289,23 @@ class Invoice extends React.Component{
           items: [],
           showList: true,
           totalAmount:0,
-          selectedItems:[]
+          selectedItems:[],
+          invoice:{
+                    "customer": {
+                        "name": "",
+                        "contact": "",
+                        "email": ""
+                    },
+                    "line_items": [
+                        {
+                            "item_id": "",
+                            "quantity": 0
+                        }
+                    ],
+                    "date": 0,
+                    "expire_by": 0,
+                    "comment": ""
+                }
         };
       }
 
@@ -323,11 +327,42 @@ class Invoice extends React.Component{
             }
           );
       }
-    
-    changeAmount=(tot,selectedItems)=>{
-        this.setState({totalAmount:tot,selectedItems:selectedItems});
+    changeCustomerDetails=(customer)=>{
+        let invoice=this.state.invoice;
+        invoice.customer={
+            "name":customer.name,
+            "contact":customer.contact,
+            "email":customer.email
+        }
+        this.setState({invoice:invoice});
     }
-
+    changeDate=(date)=>{
+        let invoice=this.state.invoice;
+        invoice.date=Number(new Date(date).getTime()/1000);
+        this.setState({invoice:invoice})
+    }
+    changeExpirebyDate=(date)=>{
+        let invoice=this.state.invoice;
+        invoice.expire_by=new Date(date).getTime()/1000;
+        this.setState({invoice:invoice})
+    }
+    changeAmount=(tot,selectedItems)=>{
+        let listItems=selectedItems.map(item=>{
+                return { "item_id": item["item"].id, "quantity": item["quantity"]}
+        });
+        let invoice=this.state.invoice;
+        invoice.line_items=listItems;
+        this.setState({
+            totalAmount:tot,
+            selectedItems:selectedItems,
+            invoice:invoice
+        });
+    }
+    changeNotes=(notes)=>{
+        let invoice=this.state.invoice;
+        invoice.comment=notes;
+        this.setState({invoice:invoice});
+    }
     componentDidMount() {
         this.getData();
       }
@@ -355,12 +390,12 @@ class Invoice extends React.Component{
                 <div className="content">
                     <div className="top-panel">
                         <h1>New Invoice</h1>
-                        <Button id='button' value='save-invoice' name='Save Invoice' onClick={()=>this.handleClick.bind(this)}/>
+                        <Button id='button' value='save-invoice' name='Save Invoice' onClick={this.handleClick}/>
                     </div>
-                    <CreateList/>
+                    <Panel1 changeCustomerDetails={this.changeCustomerDetails} changeDate={this.changeDate} changeExpirebyDate={this.changeExpirebyDate}/>
                     <ItemPanel changeAmount={this.changeAmount}/>
                     <hr></hr>
-                    <Panel2 value={this.state.totalAmount} itemList={this.state.selectedItems}/>
+                    <Panel2 value={this.state.totalAmount} itemList={this.state.selectedItems} changeNotes={this.changeNotes}/>
                 </div>
             );
         }
@@ -395,8 +430,8 @@ class Invoice extends React.Component{
                                 <th>AMOUNT</th>
                                 <th>AMOUNT DUE</th>
                             </tr>
-                                {items.map(invoice => (
-                                    <tr key={invoice.receipt}>
+                                {items.map((invoice,index) => (
+                                    <tr key={index}>
                                         <td> {(new Date(invoice.date*1000)).getDate()} {(new Date(invoice.date*1000)).toLocaleString('default', { month: 'short' })} {(new Date(invoice.date*1000)).getFullYear()} </td>
                                         <td>{invoice.customer_details.name}</td>
                                         <td>{invoice.status === 'PAID' ? <mark className="paid">{invoice.status} </mark> : <mark> {invoice.status} </mark>}</td>
