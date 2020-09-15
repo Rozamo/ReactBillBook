@@ -3,6 +3,12 @@
 let get_req = new AbortController();
 let save_req = new AbortController();
 
+const inr = new Intl.NumberFormat('en-IN', { 
+	style: 'currency', 
+	currency: 'INR', 
+	minimumFractionDigits: 2, 
+}); 
+
 function transformDate(date) {
     const newDate = new Date(date * 1000);
     return `${newDate.getDate()} ${newDate.toLocaleString('default', { month: 'short' })} ${newDate.getFullYear()}`;

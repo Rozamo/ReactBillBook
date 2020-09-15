@@ -81,7 +81,7 @@ class Table extends React.Component {
                             <tr key={item.id}>
                                 <td>{item.name}</td>
                                 <td>{item.description}</td>
-                                <td>₹{item.amount / 100}</td>
+                                <td>{inr.format(item.amount / 100)}</td>
                                 <td>{transformDate(item.created_at)}</td>
                             </tr>
                         ))}
@@ -102,8 +102,8 @@ class Table extends React.Component {
                                 <td>{transformDate(invoice.date)}</td>                                    
                                 <td>{invoice.customer_details ? invoice.customer_details.name : ''}</td>
                                 <td>{invoice.status === 'PAID' ? <mark className="paid">{invoice.status} </mark> : <mark> {invoice.status} </mark>}</td>
-                                <td>₹{invoice.amount / 100}</td>
-                                <td>{invoice.amount_due ? "₹"+(invoice.amount_due / 100) : 0}</td>
+                                <td>{inr.format(invoice.amount / 100)}</td>
+                                <td>{invoice.amount_due ? inr.format(invoice.amount_due / 100) : 0}</td>
                             </tr>
                         ))}
                 </tbody>
