@@ -194,6 +194,12 @@ class ItemPanel extends React.Component {
             tot:tot
         },()=>{changeAmount(this.state.tot,this.state.selectedItems)});
     }
+    handleDeleteClick=(event,changeAmount)=>{
+        let selectedItems=this.state.selectedItems,tot=this.state.tot;
+        tot-=selectedItems[event.target.id]["item"].amount/100*selectedItems[event.target.id]["quantity"];
+        selectedItems.splice(event.target.id,1);
+        this.setState({selectedItems:selectedItems,tot:tot},()=>{changeAmount(this.state.tot,this.state.selectedItems)});
+    }
     render() {
         if(this.state.showDDL)
          return ( 
@@ -214,7 +220,10 @@ class ItemPanel extends React.Component {
                                         <input id={index} type="text" defaultValue='1' onChange={()=>{this.handleInputChange(event,this.props.changeAmount)}}></input>
                                     </td>
                                     <td>{item["item"].amount/100}</td>
-                                    <td>{item["item"].amount*item["quantity"]/100}</td>
+                                    <td>
+                                        {item["item"].amount*item["quantity"]/100}
+                                        <i id={index} className="fa fa-trash" onClick={()=>this.handleDeleteClick(event,this.props.changeAmount)}></i>
+                                    </td>
                                 </tr>
                             ))
                         }
@@ -252,7 +261,10 @@ class ItemPanel extends React.Component {
                                         <input id={index} type="text" defaultValue='1' onChange={(event)=>{this.handleInputChange(event,this.props.changeAmount)}}></input>
                                     </td>
                                     <td>{item["item"].amount/100}</td>
-                                    <td>{item["item"].amount*item["quantity"]/100}</td>
+                                    <td>
+                                        {item["item"].amount*item["quantity"]/100}
+                                        <i id={index} className="fa fa-trash" onClick={()=>this.handleDeleteClick(event,this.props.changeAmount)}></i>
+                                    </td>
                                 </tr>
                             ))
                         }
