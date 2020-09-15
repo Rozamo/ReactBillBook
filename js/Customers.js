@@ -33,8 +33,25 @@ class Customers extends React.Component {
             isPosting
         });
     }
+    isValid() {
+        if (!/^[a-z A-Z.]+$/.test(this.state.name)) {
+            alert('Name must not be blank and must contain only alphabets and/or a dot');
+            return false;
+        }
+        if (!/^\+?[0-9]+$/.test(this.state.contact) && this.state.length >= 10) {
+            alert('Phone number must contain numbers and/or + and must have atleast 10 characters');
+            return false;
+        }
+        if (!/^[^@]+@[^@.]+.[^@.]+$/.test(this.state.email)) {
+            alert('Enter valid email');
+            return false;
+        }
+        return true;
+    }
     handleSubmit = async (event) => {
         event.preventDefault();
+        if (!this.isValid())
+            return;
         this.changeIsPosting(true);
         const new_obj = {};
         for (const i in this.state)
@@ -53,7 +70,7 @@ class Customers extends React.Component {
             <div className="cust-panel-1">
                 <div>
                     <label htmlFor="name">Name</label>
-                    <input value={this.state.name} type="text" name="name" onChange={(event) => {this.setState({name: event.target.value})}}/>
+                    <input value={this.state.name} type="text" name="name" onChange={(event) => {this.setState({name: event.target.value})}} required/>
                 </div>
                 <div>
                     <label htmlFor="contact">Phone</label>

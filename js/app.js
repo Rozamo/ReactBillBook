@@ -36,7 +36,7 @@ class BlueButton extends React.Component {
                 if (this.props.sidebar_choice === 'items')
                     return "Add Item";
                 else
-                    return `Create ${this.props.sidebar_choice.charAt(0).toUpperCase() + this.props.sidebar_choice.slice(1, this.props.sidebar_choice.length - 1)}`
+                    return `New ${this.props.sidebar_choice.charAt(0).toUpperCase() + this.props.sidebar_choice.slice(1, this.props.sidebar_choice.length - 1)}`
             }
             else if (this.props.content_choice === 'create') 
                 return `Save ${this.props.sidebar_choice.charAt(0).toUpperCase()}${this.props.sidebar_choice.slice(1, this.props.sidebar_choice.length - 1)}`;
@@ -130,7 +130,7 @@ class OutsideBox extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            sidebar_choice: "invoices"
+            sidebar_choice: "customers"
         };
     }
     changeSidebarChoice = (sidebar_choice) => {
