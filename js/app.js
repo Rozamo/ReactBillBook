@@ -87,7 +87,7 @@ class Content extends React.Component{
         //     content_choice: content_choice
         // }, () => {console.log(this.state);});
         this.setState({
-            content_choice: content_choice
+            content_choice
         });
     }
     componentDidUpdate(prevProp) {
@@ -128,8 +128,7 @@ class OutsideBox extends React.Component{
         //     sidebar_choice: sidebar_choice
         // }, () => {console.log(this.state);});
         this.setState({
-            sidebar_choice: sidebar_choice,
-            content_choice: 'list'
+            sidebar_choice
         });
     }
     render() {

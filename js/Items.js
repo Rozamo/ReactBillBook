@@ -13,7 +13,7 @@ class Items extends React.Component {
     }
     changeIsPosting(isPosting) {
         this.setState({
-            isPosting: isPosting
+            isPosting
         });
     }
     handleSubmit = async (event) => {
@@ -29,9 +29,6 @@ class Items extends React.Component {
         save_req = new AbortController();
         await PostForm(new_obj, this.props.sidebar_choice, this.props.changeContentChoice);
         this.changeIsPosting(false);
-    }
-    componentWillUnmount() {
-        save_req.abort();
     }
     render() {
         if (this.state.isPosting)

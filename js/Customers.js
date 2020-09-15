@@ -30,7 +30,7 @@ class Customers extends React.Component {
     }
     changeIsPosting(isPosting) {
         this.setState({
-            isPosting: isPosting
+            isPosting
         });
     }
     handleSubmit = async (event) => {
