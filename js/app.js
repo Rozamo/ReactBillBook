@@ -1,135 +1,154 @@
 'use strict';
 
-class Button extends React.Component{
-    render(){
-        return(
-            <button id={this.props.id} className={this.props.cls} value={this.props.value}>
-                {this.props.name}
-            </button>
-        );
+let get_req = new AbortController();
+let save_req = new AbortController();
+
+const inr = new Intl.NumberFormat('en-IN', { 
+	style: 'currency', 
+	currency: 'INR', 
+	minimumFractionDigits: 2, 
+}); 
+
+function transformDate(date) {
+    const newDate = new Date(date * 1000);
+    return `${newDate.getDate()} ${newDate.toLocaleString('default', { month: 'short' })} ${newDate.getFullYear()}`;
+}
+
+function SideBarItem(props) {
+    const handleSidebarClick = (sidebar_choice) => {
+        // if (sidebar_choice.includes('active'))
+        //     props.changeSidebarChoice(event, sidebar_choice.replace(' active', ''));
+        // else
+        //     props.changeSidebarChoice(event, sidebar_choice);
+        if (!sidebar_choice.includes('active'))
+            props.changeSidebarChoice(sidebar_choice);
+    }
+    return <div className={props.cls} onClick={() => handleSidebarClick(props.cls)}>{props.value}</div>;
+}
+
+class BlueButton extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    renderButtonName() {
+        if (this.props.sidebar_choice && this.props.content_choice) {
+            if (this.props.content_choice === 'list') {
+                if (this.props.sidebar_choice === 'items')
+                    return "Add Item";
+                else
+                    return `Create ${this.props.sidebar_choice.charAt(0).toUpperCase() + this.props.sidebar_choice.slice(1, this.props.sidebar_choice.length - 1)}`
+            }
+            else if (this.props.content_choice === 'create') 
+                return `Save ${this.props.sidebar_choice.charAt(0).toUpperCase()}${this.props.sidebar_choice.slice(1, this.props.sidebar_choice.length - 1)}`;
+        }
+    }
+    handleButtonClick = (event) => {
+        if (this.props.sidebar_choice && this.props.content_choice) {
+            if (this.props.content_choice === 'list')
+                this.props.changeContentChoice('create');
+            else if (this.props.content_choice === 'create')
+                this.props.handleSubmit(event);
+        }
+        return null;
+    }
+    render() {
+        return <button type={this.props.type} id="button" value="" onClick={this.handleButtonClick}>
+            {this.renderButtonName()}
+        </button>;
     }
 }
 
-class SideBarItem extends React.Component{
-    render(){
-        return(
-            <div className={this.props.cls}>{this.props.value}</div>
-        );
+function TopPanel(props) {
+    function renderTitle() {
+        if (props.sidebar_choice && props.content_choice) {
+            if (props.content_choice === 'list') 
+                return <h1 id="title">{props.sidebar_choice.charAt(0).toUpperCase() + props.sidebar_choice.slice(1)}</h1>
+            else
+                return <h1 id="title">New {props.sidebar_choice.charAt(0).toUpperCase() + props.sidebar_choice.slice(1, props.sidebar_choice.length - 1)}</h1>
+        }
+        return null;
     }
+    function renderButton() {
+        if (props.sidebar_choice && props.content_choice) {
+            if (props.content_choice === 'list') 
+                return <BlueButton sidebar_choice={props.sidebar_choice} content_choice={props.content_choice} changeContentChoice={props.changeContentChoice}/>
+        }
+        return null;
+    }
+    return <div className="top-panel">
+        {renderTitle()}
+        {renderButton()}
+    </div>;
 }
 
 class Content extends React.Component{
-
     constructor(props) {
         super(props);
         this.state = {
-          error: null,
-          isLoaded: false,
-          items: []
-        };
-      }
-
-    componentDidMount() {
-        fetch("https://rzp-training.herokuapp.com/team2/invoices?type=invoice")
-          .then(res => res.json())
-          .then(
-            (result) => {
-              this.setState({
-                isLoaded: true,
-                items: result.items
-              });
-            },
-            (error) => {
-              this.setState({
-                isLoaded: true,
-                error
-              });
-            }
-          )
-      }
-    render(){
-        const { error, isLoaded, items } = this.state;
-        if (error) {
-            return <div>Error: {error.message}</div>;
-        } 
-        else if (!isLoaded) {
-            return (
-                <div className="content">
-                    <div className="top-panel">
-                        <h1>Invoices</h1>
-                        <Button id='button' value='create-invoice' name='New Invoice'/>
-                    </div>
-                    <img src="images/load.gif" alt="Loading...." id="load-img"></img>
-                </div>
-            );
-        } 
-        else {
-            return (
-                <div className="content">
-                    <div className="top-panel">
-                        <h1>Invoices</h1>
-                        <Button id='button' value='create-invoice' name='New Invoice'/>
-                    </div>
-
-                    <table className="inv-table" id="inv-table">
-                        <tbody>
-                            <tr>
-                                <th>DATE</th>
-                                <th>CUSTOMER</th>
-                                <th>PAID STATUS</th>
-                                <th>AMOUNT</th>
-                                <th>AMOUNT DUE</th>
-                            </tr>
-                                {items.map(invoice => (
-                                    <tr>
-                                        <td> {(new Date(invoice.date*1000)).getDate()} {(new Date(invoice.date*1000)).toLocaleString('default', { month: 'short' })} {(new Date(invoice.date*1000)).getFullYear()} </td>
-                                        <td>{invoice.customer_details.name}</td>
-                                        <td>{invoice.status === 'PAID' ? <mark className="paid">{invoice.status} </mark> : <mark> {invoice.status} </mark>}</td>
-                                        <td>{invoice.amount}</td>
-                                        <td>{invoice.amount_due ? invoice.amount_due : 0}</td>
-                                    </tr>
-                                ))}
-                        </tbody>
-                    </table>
-                </div>
-
-
-                // <ul>
-                // {items.map(item => (
-                //     <li key={item.customer_details.name}>
-                //     {item.customer_details.name}
-                //     </li>
-                // ))}
-                // </ul>
-            );
+            content_choice: 'list'
         }
     }
-}
+    changeContentChoice = (content_choice) => {
+        // this.setState({
+        //     content_choice: content_choice
+        // }, () => {console.log(this.state);});
+        this.setState({
+            content_choice
+        });
+    }
+    componentDidUpdate(prevProp) {
+        if (this.props.sidebar_choice != prevProp.sidebar_choice) {
+            this.setState({
+                content_choice: 'list'
+            });
+        }
+    }
+    handleContent() {
+        if (this.props.sidebar_choice && this.state.content_choice) {
+            if (this.state.content_choice === 'list')
+                return <Table sidebar_choice={this.props.sidebar_choice}/>;
+            else if (this.props.sidebar_choice === 'customers')
+                return <Customers sidebar_choice={this.props.sidebar_choice} content_choice={this.state.content_choice} changeContentChoice={this.changeContentChoice}/>;
+            else if (this.props.sidebar_choice === 'items')
+                return <Items sidebar_choice={this.props.sidebar_choice} content_choice={this.state.content_choice} changeContentChoice={this.changeContentChoice}/>;
+        }
+        return null;
+    }
+    render() {
+        if (this.props.sidebar_choice === 'customers' || this.props.sidebar_choice === 'items')
+            return <div className="content">
+                <TopPanel sidebar_choice={this.props.sidebar_choice} content_choice={this.state.content_choice} changeContentChoice={this.changeContentChoice}/>
+                {this.handleContent()}
+            </div>;
+        else
+            return <Invoices sidebar_choice={this.props.sidebar_choice} content_choice={this.state.content_choice} changeContentChoice={this.changeContentChoice}/>;
 
-class SideBar extends React.Component{
-    render(){
-        return(
-            <div className="side-bar">
-                <SideBarItem value="Customers" cls="customers"/>
-                <SideBarItem value="Items" cls="items"/>
-                <SideBarItem value="Invoices" cls="invoices active"/>
-            </div>
-        );
     }
 }
 
 class OutsideBox extends React.Component{
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            contentToShow: "invoice-list",
-        }
+        this.state = {
+            sidebar_choice: "invoices"
+        };
     }
-    render(){
+    changeSidebarChoice = (sidebar_choice) => {
+        // this.setState({
+        //     sidebar_choice: sidebar_choice
+        // }, () => {console.log(this.state);});
+        this.setState({
+            sidebar_choice
+        });
+    }
+    render() {
+        const arr = ["Customers", "Items", "Invoices"];
         return(
             <div className="outside-box">
-                <SideBar/>
-                <Content contentToShow={this.state.contentToShow}/>
+                <div className="side-bar">
+                    {arr.map(el => <SideBarItem key={el} value={el} cls={el.toLowerCase().concat(this.state.sidebar_choice === el.toLowerCase() ? ' active' : '')}  changeSidebarChoice={this.changeSidebarChoice}/>)}
+                </div>
+                <Content sidebar_choice={this.state.sidebar_choice}/>
             </div>
         );
     }

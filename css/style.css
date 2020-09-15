@@ -37,6 +37,7 @@ body {
     text-align: center;
     padding: 5%;
     background-color: white;
+    border-left: 5px solid white;
 }
 
 .side-bar > div:hover {
@@ -47,6 +48,7 @@ body {
 .side-bar > div.active {
     background-color: rgb(249, 251, 255);
     color: rgb(81, 77, 210);
+    border-left: 5px solid rgb(86, 85, 208);
 }
 
 .content {
@@ -69,7 +71,9 @@ body {
     padding: 1% 1% 1% 1%;
     border-radius: 5px;
     border: none;
-    width: 10em;
+    /* width: 10em; */
+    min-width: 200px;
+    min-height: 37px;
     position: relative;
 }
 
