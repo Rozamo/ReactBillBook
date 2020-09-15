@@ -115,10 +115,14 @@ class Content extends React.Component{
         return null;
     }
     render() {
-        return <div className="content">
-            <TopPanel sidebar_choice={this.props.sidebar_choice} content_choice={this.state.content_choice} changeContentChoice={this.changeContentChoice}/>
-            {this.handleContent()}
-        </div>;
+        if (this.props.sidebar_choice === 'customers' || this.props.sidebar_choice === 'items')
+            return <div className="content">
+                <TopPanel sidebar_choice={this.props.sidebar_choice} content_choice={this.state.content_choice} changeContentChoice={this.changeContentChoice}/>
+                {this.handleContent()}
+            </div>;
+        else
+            return <Invoices sidebar_choice={this.props.sidebar_choice} content_choice={this.state.content_choice} changeContentChoice={this.changeContentChoice}/>;
+
     }
 }
 
