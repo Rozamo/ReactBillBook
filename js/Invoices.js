@@ -232,7 +232,7 @@ class ItemPanel extends React.Component {
                 <table className="item-tbl" id="inv-item-tbl">
                     <tbody>
                         <tr>
-                            <th style={{width:"60%"}}>Items</th>
+                            <th style={{width:"40%"}}>Items</th>
                             <th style={{width:"5%"}}>Quantity</th>
                             <th>Price</th>
                             <th>Amount</th>
@@ -242,7 +242,7 @@ class ItemPanel extends React.Component {
                                 <tr key={index}>
                                     <td>{item["item"].name}</td>
                                     <td>
-                                        <input id={index} type="text" defaultValue={item.quantity} onChange={()=>{this.handleInputChange(event,this.props.changeAmount)}}></input>
+                                        <input id={index} style={{width:"100px"}} type="text" defaultValue='1' value={item.quantity} onChange={()=>{this.handleInputChange(event,this.props.changeAmount)}}></input>
                                     </td>
                                     <td>{item["item"].amount/100}</td>
                                     <td>
@@ -273,7 +273,7 @@ class ItemPanel extends React.Component {
                 <table className="item-tbl" id="inv-item-tbl">
                     <tbody>
                         <tr>
-                            <th style={{width:"60%"}}>Items</th>
+                            <th style={{width:"40%"}}>Items</th>
                             <th style={{width:"5%"}}>Quantity</th>
                             <th>Price</th>
                             <th>Amount</th>
@@ -283,7 +283,7 @@ class ItemPanel extends React.Component {
                                 <tr key={index}>
                                     <td>{item["item"].name}</td>
                                     <td>
-                                        <input id={index} type="text" defaultValue={item.quantity} onChange={(event)=>{this.handleInputChange(event,this.props.changeAmount)}}></input>
+                                        <input id={index} style={{width:"100px"}} type="text" defaultValue='1' value={item.quantity} onChange={(event)=>{this.handleInputChange(event,this.props.changeAmount)}}></input>
                                     </td>
                                     <td>{item["item"].amount/100}</td>
                                     <td>

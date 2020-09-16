@@ -42,7 +42,7 @@ class Items extends React.Component {
     render() {
         if (this.state.isPosting)
             return <img src="images/load.gif" alt="Loading...." id="load-img"></img>;
-        else return <form className="customer-form" style={{width: "50%"}} onSubmit={this.handleSubmit}>
+        else return <form className="customer-form" style={{width: "350px"}} onSubmit={this.handleSubmit}>
             <label htmlFor="name">Name</label>
             <input value={this.state.name} type="text" name="name" onChange={(event) => {this.setState({name: event.target.value})}}/>
             <label htmlFor="amount">Price</label>

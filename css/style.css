@@ -132,3 +132,33 @@ mark.paid {
     left: 50%;
 }
 
+.item-total-tbl{
+    margin-top: -20px;
+}
+
+.item-total-tbl-name{
+    margin-bottom: 5px;
+    padding: 0px;
+    width: 50%;
+    height: 36px;
+}
+.item-total-tbl-quantity{
+    margin-bottom: 5px;
+    padding: 0px;
+    height: 36px;
+}
+
+.item-total-tbl-amount{
+    margin-bottom: 5px;
+    padding: 0px;
+    height: 36px;
+    text-align: right;
+}
+
+.item-total-last-row{
+    margin: 20px 0px;
+}
+#item-total-amount{
+    float: right;
+}
+
