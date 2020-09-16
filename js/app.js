@@ -140,11 +140,10 @@ class Content extends React.Component{
         return null;
     }
     render() {
-        if (this.props.sidebar_choice === 'customers' || this.props.sidebar_choice === 'items')
-            return <div className="content">
-                <TopPanel sidebar_choice={this.props.sidebar_choice} content_choice={this.state.content_choice} changeContentChoice={this.changeContentChoice}/>
-                {this.handleContent()}
-            </div>;
+        if (this.props.sidebar_choice === 'customers')
+            return <Customers sidebar_choice={this.props.sidebar_choice} content_choice={this.state.content_choice} changeContentChoice={this.changeContentChoice}/>;
+        else if (this.props.sidebar_choice === 'items')
+            return <Items sidebar_choice={this.props.sidebar_choice} content_choice={this.state.content_choice} changeContentChoice={this.changeContentChoice}/>;
         else
             return <Invoices sidebar_choice={this.props.sidebar_choice} content_choice={this.state.content_choice} changeContentChoice={this.changeContentChoice}/>;
 
@@ -155,7 +154,7 @@ class OutsideBox extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            sidebar_choice: "invoices"
+            sidebar_choice: "items"
         };
     }
     changeSidebarChoice = (sidebar_choice) => {

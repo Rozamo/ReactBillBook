@@ -18,7 +18,7 @@ async function PostForm(obj, sidebar_choice, changeContentChoice) {
     }
 }
 
-class Customers extends React.Component {
+class CustomersForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -62,7 +62,7 @@ class Customers extends React.Component {
         await PostForm(new_obj, this.props.sidebar_choice, this.props.changeContentChoice);
         this.changeIsPosting(false);
     }
-    render() {
+    handleContent() {
         if (this.state.isPosting)
             return <img src="images/load.gif" alt="Loading...." id="load-img"></img>;
         else
@@ -84,5 +84,69 @@ class Customers extends React.Component {
             </div>
         </form>;
     }
-        
+    render() {
+        return <div className="content">
+            <TopPanel sidebar_choice={this.props.sidebar_choice} content_choice={this.props.content_choice} changeContentChoice={this.props.changeContentChoice}/>
+            {this.handleContent()}
+        </div>;
+    }        
+}
+
+class CustomersTable extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            error: null,
+            isLoaded: false,
+            items: []
+        };
+    }
+    async getData() {
+        const data = await loadData(this.props.sidebar_choice);
+        if (data && data.entity === 'collection') {
+            this.setState({
+                isLoaded: true,
+                items: data.items
+            });
+        }
+        else if (data) {
+            this.setState({
+                error: data,
+                isLoaded: true
+            });
+        }
+    }
+    componentDidMount() {
+        get_req.abort();
+        get_req = new AbortController();
+        this.getData();
+    }
+    componentWillUnmount() {
+        get_req.abort();
+    }
+    handleContent() {
+        const { error, isLoaded, items } = this.state;
+        if (error)
+            return <div>Error: {error.message}</div>;
+        else if (!isLoaded)
+            return <img src="images/load.gif" alt="Loading...." id="load-img"></img>;
+        else return <table className="inv-table" id="inv-table">
+            {TableHead('NAME', 'PHONE', 'EMAIL', 'CREATED ON')}
+            {TableBody(items, 'name', 'contact', 'email', 'created_at')}
+        </table>;
+    }
+    render() {
+        return <div className="content">
+            <TopPanel sidebar_choice={this.props.sidebar_choice} content_choice={this.props.content_choice} changeContentChoice={this.props.changeContentChoice}/>
+            {this.handleContent()}
+        </div>;
+    }
+}
+
+function Customers(props) {
+    if (props.content_choice === 'list')
+        return <CustomersTable sidebar_choice={props.sidebar_choice} content_choice={props.content_choice} changeContentChoice={props.changeContentChoice}/>;
+    else
+        return <CustomersForm sidebar_choice={props.sidebar_choice} content_choice={props.content_choice} changeContentChoice={props.changeContentChoice}/>;
+
 }

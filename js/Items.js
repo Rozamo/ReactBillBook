@@ -1,6 +1,6 @@
 'use strict';
 
-class Items extends React.Component {
+class ItemsForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -39,7 +39,7 @@ class Items extends React.Component {
         await PostForm(new_obj, this.props.sidebar_choice, this.props.changeContentChoice);
         this.changeIsPosting(false);
     }
-    render() {
+    handleContent() {
         if (this.state.isPosting)
             return <img src="images/load.gif" alt="Loading...." id="load-img"></img>;
         else return <form className="customer-form" style={{width: "50%"}} onSubmit={this.handleSubmit}>
@@ -53,4 +53,112 @@ class Items extends React.Component {
             <BlueButton sidebar_choice={this.props.sidebar_choice} content_choice={this.props.content_choice} handleSubmit={this.handleSubmit}/>
         </form>;
     }
+    render() {
+        return <div className="content">
+            <TopPanel sidebar_choice={this.props.sidebar_choice} content_choice={this.props.content_choice} changeContentChoice={this.props.changeContentChoice}/>
+            {this.handleContent()}
+        </div>;
+    }
 }
+
+async function loadData(sidebar_choice) {
+    get_req.abort();
+    get_req = new AbortController();
+    try {
+        const response = await fetch(`https://rzp-training.herokuapp.com/team2/${sidebar_choice}`, { signal: get_req.signal });
+        const data = await response.json();
+        return data;
+    }
+    catch (error) {
+        if (error.name === 'AbortError')
+            return;
+        return error;
+    }
+}
+
+function TableHead(...arr) {
+    return <thead> 
+        <tr>
+            {arr.map((element, index) => (
+                <th key={index}>{element}</th>
+            ))}
+        </tr>
+    </thead>;
+}
+
+function TableBody(items, ...arr) {
+    return <tbody>
+        {items.map(customer => (
+            <tr key={customer.id}>
+                {arr.map(element => {
+                    if (element === 'amount')
+                        return <td>{inr.format(customer[element] / 100)}</td>;
+                    else if (element === 'created_at')
+                        return <td>{transformDate(customer[element])}</td>;
+                    else
+                        return <td>{customer[element]}</td>;
+                })}
+            </tr>
+        ))}
+    </tbody>;
+}
+
+class ItemsTable extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            error: null,
+            isLoaded: false,
+            items: []
+        };
+    }
+    async getData() {
+        const data = await loadData(this.props.sidebar_choice);
+        if (data && data.entity === 'collection') {
+            this.setState({
+                isLoaded: true,
+                items: data.items
+            });
+        }
+        else if (data) {
+            this.setState({
+                error: data,
+                isLoaded: true
+            });
+        }
+    }
+    componentDidMount() {
+        get_req.abort();
+        get_req = new AbortController();
+        this.getData();
+    }
+    componentWillUnmount() {
+        get_req.abort();
+    }
+    handleContent() {
+        const { error, isLoaded, items } = this.state;
+        if (error)
+            return <div>Error: {error.message}</div>;
+        else if (!isLoaded)
+            return <img src="images/load.gif" alt="Loading...." id="load-img"></img>;
+        else return <table className="inv-table" id="inv-table">
+            {TableHead('NAME', 'DESCRIPTION', 'PRICE', 'ADDED ON')}
+            {TableBody(items, 'name', 'description', 'amount', 'created_at')}
+        </table>;
+    }
+    render() {
+        return <div className="content">
+            <TopPanel sidebar_choice={this.props.sidebar_choice} content_choice={this.props.content_choice} changeContentChoice={this.props.changeContentChoice}/>
+            {this.handleContent()}
+        </div>;
+    }
+}
+
+function Items(props) {
+    if (props.content_choice === 'list')
+        return <ItemsTable sidebar_choice={props.sidebar_choice} content_choice={props.content_choice} changeContentChoice={props.changeContentChoice}/>;
+    else
+        return <ItemsForm sidebar_choice={props.sidebar_choice} content_choice={props.content_choice} changeContentChoice={props.changeContentChoice}/>;
+
+}
+
