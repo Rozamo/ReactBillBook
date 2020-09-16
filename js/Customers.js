@@ -38,7 +38,7 @@ class Customers extends React.Component {
             alert('Name must not be blank and must contain only alphabets and/or a dot');
             return false;
         }
-        if (!/^\+?[0-9]+$/.test(this.state.contact) && this.state.length >= 10) {
+        if (!/^\+?[0-9]+$/.test(this.state.contact) || this.state.contact.length < 10) {
             alert('Phone number must contain numbers and/or + and must have atleast 10 characters');
             return false;
         }
