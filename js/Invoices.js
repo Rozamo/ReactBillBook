@@ -497,13 +497,13 @@ class Invoices extends React.Component{
                                 <th>AMOUNT</th>
                                 <th>AMOUNT DUE</th>
                             </tr>
-                                {items.map((invoice,index) => (
-                                    <tr key={index}>
-                                        <td> {(new Date(invoice.date*1000)).getDate()} {(new Date(invoice.date*1000)).toLocaleString('default', { month: 'short' })} {(new Date(invoice.date*1000)).getFullYear()} </td>
-                                        <td>{invoice.customer_details.name}</td>
+                                {items.map(invoice => (
+                                    <tr key={invoice.id}>
+                                        <td>{transformDate(invoice.date)}</td>                                    
+                                        <td>{invoice.customer_details ? invoice.customer_details.name : ''}</td>
                                         <td>{invoice.status === 'PAID' ? <mark className="paid">{invoice.status} </mark> : <mark> {invoice.status} </mark>}</td>
-                                        <td>{invoice.amount/100}</td>
-                                        <td>{invoice.amount_due ? invoice.amount_due/100 : 0}</td>
+                                        <td>{inr.format(invoice.amount / 100)}</td>
+                                        <td>{invoice.amount_due ? inr.format(invoice.amount_due / 100) : 0}</td>
                                     </tr>
                                 ))}
                         </tbody>
