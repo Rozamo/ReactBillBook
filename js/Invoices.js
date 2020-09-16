@@ -221,6 +221,7 @@ class ItemPanel extends React.Component {
     handleDeleteClick=(event,changeAmount)=>{
         let selectedItems=this.state.selectedItems,tot=this.state.tot;
         tot-=selectedItems[event.target.id]["item"].amount/100*selectedItems[event.target.id]["quantity"];
+        console.log(selectedItems[event.target.id]["item"]);
         selectedItems.splice(event.target.id,1);
         this.setState({selectedItems:selectedItems,tot:tot},()=>{changeAmount(this.state.tot,this.state.selectedItems)});
     }
@@ -241,7 +242,7 @@ class ItemPanel extends React.Component {
                                 <tr key={index}>
                                     <td>{item["item"].name}</td>
                                     <td>
-                                        <input id={index} type="text" defaultValue='1' onChange={()=>{this.handleInputChange(event,this.props.changeAmount)}}></input>
+                                        <input id={index} type="text" defaultValue={item.quantity} onChange={()=>{this.handleInputChange(event,this.props.changeAmount)}}></input>
                                     </td>
                                     <td>{item["item"].amount/100}</td>
                                     <td>
@@ -282,7 +283,7 @@ class ItemPanel extends React.Component {
                                 <tr key={index}>
                                     <td>{item["item"].name}</td>
                                     <td>
-                                        <input id={index} type="text" defaultValue='1' onChange={(event)=>{this.handleInputChange(event,this.props.changeAmount)}}></input>
+                                        <input id={index} type="text" defaultValue={item.quantity} onChange={(event)=>{this.handleInputChange(event,this.props.changeAmount)}}></input>
                                     </td>
                                     <td>{item["item"].amount/100}</td>
                                     <td>
@@ -315,20 +316,11 @@ class Invoices extends React.Component{
           totalAmount:0,
           selectedItems:[],
           invoice:{
-                    "customer": {
-                        "name": "",
-                        "contact": "",
-                        "email": ""
-                    },
-                    "line_items": [
-                        {
-                            "item_id": "",
-                            "quantity": 0
-                        }
-                    ],
-                    "date": 0,
-                    "expire_by": 0,
-                    "comment": ""
+                    "customer": null,
+                    "line_items": [],
+                    "date": null,
+                    "expire_by": null,
+                    "comment": null
                 }
         };
       }
@@ -392,11 +384,36 @@ class Invoices extends React.Component{
       }
     handleClick = async () => {
         if (!this.state.showList) {
-            console.log(this.state);
             const new_obj = {};
             for (const i in this.state.invoice)
-                new_obj[i] = this.state.invoice[i];
-            console.log(new_obj);
+                {
+                    new_obj[i] = this.state.invoice[i];
+                    if(i==="line_items"&& new_obj[i].length===0)
+                    {
+                        console.log("items cant be empty, please choose some items");
+                        alert("items cant be empty, please choose some items");
+                        return ;
+                    }
+                    if(i==="line_items")
+                    {
+                        let flag=1;
+                        new_obj[i].forEach(item => {
+                            if(!item.quantity){
+                                console.log("quantity cant be zero or empty");
+                                alert("quantity cant be zero or empty");
+                                flag=0;
+                                return ;
+                            }
+                        });
+                        if(!flag)return;
+                        
+                    }
+                    if(!new_obj[i]){
+                        console.log(i," cant be null or empty");
+                        alert(i+" cant be null or empty");
+                        return;
+                    }
+                }
             save_req.abort();
             save_req = new AbortController();
             const data = await PostForm1(new_obj, "invoices");
