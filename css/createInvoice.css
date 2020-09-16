@@ -173,3 +173,9 @@ textarea {
     padding-bottom: 5px;
     font-size: large;
 }
+
+#floppy {
+    height: 16px;
+    width: 16px;
+    margin-right: 7px;
+}
