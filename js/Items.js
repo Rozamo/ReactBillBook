@@ -16,8 +16,17 @@ class Items extends React.Component {
             isPosting
         });
     }
+    isValid() {
+        if (!/^[0-9]*.?[0-9]+$/.test(this.state.amount)) {
+            alert('Amount must be valid');
+            return false;
+        }
+        return true;
+    }
     handleSubmit = async (event) => {
         event.preventDefault();
+        if (!this.isValid())
+            return;
         this.changeIsPosting(true);
         const new_obj = {};
         for (const i in this.state)
