@@ -24,7 +24,7 @@ body {
     background: white;
     width: 20%;
     height: 100%;
-    border: 1px solid rgb(239, 243, 250); 
+    border-right: 1px solid rgb(239, 243, 250); 
     box-shadow: #5750d8 5px 5px;
 }
 
@@ -37,7 +37,10 @@ body {
     text-align: center;
     padding: 5%;
     background-color: white;
-    border-left: 5px solid white;
+    border-left: 4px solid white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .side-bar > div:hover {
@@ -48,7 +51,15 @@ body {
 .side-bar > div.active {
     background-color: rgb(249, 251, 255);
     color: rgb(81, 77, 210);
-    border-left: 5px solid rgb(86, 85, 208);
+    border-left: 4px solid rgb(86, 85, 208);
+}
+
+.side-bar > div > svg {
+    fill: rgb(166, 172, 191);
+}
+
+.side-bar > div.active > svg {
+    fill: rgb(81, 77, 210);
 }
 
 .content {
@@ -72,9 +83,13 @@ body {
     border-radius: 5px;
     border: none;
     /* width: 10em; */
-    min-width: 200px;
+    min-width: 150px;
     min-height: 37px;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
 }
 
 #button:hover{
