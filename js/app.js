@@ -70,7 +70,7 @@ class BlueButton extends React.Component {
     }
     icon() {
         if (this.props.content_choice === 'list')
-            return <img src="images/plus.png" id="floppy" alt="Save"></img>
+            return <img src="images/plus.png" id="floppy" alt="Save"></img>;
         else if (this.props.content_choice === 'create')
             return <img src="images/floppy.png" id="floppy" alt="Save"></img>;
         return null;
@@ -155,7 +155,7 @@ class OutsideBox extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            sidebar_choice: "customers"
+            sidebar_choice: "invoices"
         };
     }
     changeSidebarChoice = (sidebar_choice) => {
