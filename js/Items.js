@@ -61,48 +61,6 @@ class ItemsForm extends React.Component {
     }
 }
 
-async function loadData(sidebar_choice) {
-    get_req.abort();
-    get_req = new AbortController();
-    try {
-        const response = await fetch(`https://rzp-training.herokuapp.com/team2/${sidebar_choice}`, { signal: get_req.signal });
-        const data = await response.json();
-        return data;
-    }
-    catch (error) {
-        if (error.name === 'AbortError')
-            return;
-        return error;
-    }
-}
-
-function TableHead(...arr) {
-    return <thead> 
-        <tr>
-            {arr.map((element, index) => (
-                <th key={index}>{element}</th>
-            ))}
-        </tr>
-    </thead>;
-}
-
-function TableBody(items, ...arr) {
-    return <tbody>
-        {items.map(customer => (
-            <tr key={customer.id}>
-                {arr.map(element => {
-                    if (element === 'amount')
-                        return <td>{inr.format(customer[element] / 100)}</td>;
-                    else if (element === 'created_at')
-                        return <td>{transformDate(customer[element])}</td>;
-                    else
-                        return <td>{customer[element]}</td>;
-                })}
-            </tr>
-        ))}
-    </tbody>;
-}
-
 class ItemsTable extends React.Component {
     constructor(props) {
         super(props);

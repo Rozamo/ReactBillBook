@@ -1,25 +1,7 @@
 'use strict';
 
-let get_req = new AbortController();
-let save_req = new AbortController();
-
-const inr = new Intl.NumberFormat('en-IN', { 
-	style: 'currency', 
-	currency: 'INR', 
-	minimumFractionDigits: 2, 
-}); 
-
-function transformDate(date) {
-    const newDate = new Date(date * 1000);
-    return `${newDate.getDate()} ${newDate.toLocaleString('default', { month: 'short' })} ${newDate.getFullYear()}`;
-}
-
 function SideBarItem(props) {
     const handleSidebarClick = (sidebar_choice) => {
-        // if (sidebar_choice.includes('active'))
-        //     props.changeSidebarChoice(event, sidebar_choice.replace(' active', ''));
-        // else
-        //     props.changeSidebarChoice(event, sidebar_choice);
         if (!sidebar_choice.includes('active'))
             props.changeSidebarChoice(sidebar_choice);
     }
@@ -127,17 +109,6 @@ class Content extends React.Component{
                 content_choice: 'list'
             });
         }
-    }
-    handleContent() {
-        if (this.props.sidebar_choice && this.state.content_choice) {
-            if (this.state.content_choice === 'list')
-                return <Table sidebar_choice={this.props.sidebar_choice}/>;
-            else if (this.props.sidebar_choice === 'customers')
-                return <Customers sidebar_choice={this.props.sidebar_choice} content_choice={this.state.content_choice} changeContentChoice={this.changeContentChoice}/>;
-            else if (this.props.sidebar_choice === 'items')
-                return <Items sidebar_choice={this.props.sidebar_choice} content_choice={this.state.content_choice} changeContentChoice={this.changeContentChoice}/>;
-        }
-        return null;
     }
     render() {
         if (this.props.sidebar_choice === 'customers')
