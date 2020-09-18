@@ -6,7 +6,7 @@ import Panel2 from "./Panel2.js";
 import Table from "../Table.js";
 
 class Invoices extends React.Component {
-    _isMounted=false;
+	_isMounted = false;
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -62,14 +62,14 @@ class Invoices extends React.Component {
 		this.setState({ invoice: invoice });
 	};
 	componentDidMount() {
-		this._isMounted=true;
-		this.setState({isLoaded:true})
-    }
-    componentWillUnmount() {
-        this._isMounted=false;
-    }
+		this._isMounted = true;
+		this.setState({ isLoaded: true });
+	}
+	componentWillUnmount() {
+		this._isMounted = false;
+	}
 	handleClick = () => {
-        let showList = !this.state.showList;
+		let showList = !this.state.showList;
 		if (this.state.showList) {
 			this.setState({
 				error: null,
@@ -77,8 +77,7 @@ class Invoices extends React.Component {
 				items: [],
 				showList: showList,
 			});
-        }
-        else {
+		} else {
 			const new_obj = {};
 			for (const i in this.state.invoice) {
 				new_obj[i] = this.state.invoice[i];
@@ -101,8 +100,8 @@ class Invoices extends React.Component {
 					alert(i + " cant be null or empty");
 					return;
 				}
-            }
-            this.setState({
+			}
+			this.setState({
 				error: null,
 				isLoaded: false,
 				items: [],
@@ -117,16 +116,15 @@ class Invoices extends React.Component {
 			})
 				.then((response) => response.json())
 				.then((data) => {
-                    if(data.error){
-                        this.setState({
-                            isLoaded:true,
-                            error:data.error.description,
-                        })
-                    }
-                    else {
-                        this.setState({ showList: showList , isLoaded:true });
-                        console.log("success",data);
-                    }
+					if (data.error) {
+						this.setState({
+							isLoaded: true,
+							error: data.error.description,
+						});
+					} else {
+						this.setState({ showList: showList, isLoaded: true });
+						console.log("success", data);
+					}
 				})
 				.catch((error) => {
 					console.error("Error:", error);
@@ -200,7 +198,7 @@ class Invoices extends React.Component {
 						/>
 					</div>
 
-					<Table sidebar_choice='invoices'/>
+					<Table sidebarChoice="invoices" />
 				</div>
 			);
 		}

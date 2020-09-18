@@ -1,5 +1,5 @@
 import React from "react";
-import BlueButton from "../BlueButton";
+import SaveButton from "../SaveButton";
 
 class Items extends React.Component {
 	constructor(props) {
@@ -25,8 +25,8 @@ class Items extends React.Component {
 		const new_obj = {};
 		for (const i in this.state)
 			if (i === "amount") new_obj[i] = Number(this.state[i]) * 100;
-            else if (i !== "isPosting") new_obj[i] = this.state[i];
-		this.setState({isPosting:true});
+			else if (i !== "isPosting") new_obj[i] = this.state[i];
+		this.setState({ isPosting: true });
 		fetch("https://rzp-training.herokuapp.com/team2/items", {
 			method: "POST",
 			headers: {
@@ -38,19 +38,19 @@ class Items extends React.Component {
 			.then((data) => {
 				if (data.error) {
 					this.setState({
-                        isPosting: false,
-                    });
-                    alert(data.error);
+						isPosting: false,
+					});
+					alert(data.error);
 				} else {
-                    console.log("success", data);
-                    this.props.changeContentChoice('list');
+					console.log("success", data);
+					this.props.changeContentChoice("list");
 				}
 			})
 			.catch((error) => {
 				console.error("Error:", error);
 				alert(error.message);
 			});
-	}
+	};
 	render() {
 		if (this.state.isPosting)
 			return <img src="images/load.gif" alt="Loading...." id="load-img"></img>;
@@ -89,9 +89,9 @@ class Items extends React.Component {
 						}}
 					/>
 					<br></br>
-					<BlueButton
-						sidebar_choice={this.props.sidebar_choice}
-						content_choice={this.props.content_choice}
+					<SaveButton
+						sidebarChoice={this.props.sidebarChoice}
+						contentChoice={this.props.contentChoice}
 						handleSubmit={this.handleSubmit}
 					/>
 				</form>
