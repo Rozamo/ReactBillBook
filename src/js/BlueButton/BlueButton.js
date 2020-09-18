@@ -15,15 +15,15 @@ export default function BlueButton(props) {
                 return `Save ${props.sidebar_choice.charAt(0).toUpperCase()}${props.sidebar_choice.slice(1, props.sidebar_choice.length - 1)}`;
         }
     }
-    const handleButtonClick = (event) => {
-        if (props.sidebar_choice && props.content_choice) {
-            if (props.content_choice === 'list')
-                props.changeContentChoice('create');
-            else if (props.content_choice === 'create')
-                props.handleSubmit(event);
-        }
-        return null;
-    }
+    // const handleButtonClick = (event) => {
+    //     if (props.sidebar_choice && props.content_choice) {
+    //         if (props.content_choice === 'list')
+    //             props.changeContentChoice('create');
+    //         else if (props.content_choice === 'create')
+    //             props.handleSubmit(event);
+    //     }
+    //     return null;
+    // }
     function icon() {
         if (props.content_choice === 'list')
             return <img src={plus} id="floppy" alt="New"></img>;
@@ -31,7 +31,7 @@ export default function BlueButton(props) {
             return <img src={floppy} id="floppy" alt="Save"></img>;
         return null;
     }
-    return <button id="button" value="" onClick={handleButtonClick}>
+    return <button id="button" value="">
         {icon()}
         {renderButtonName()}
     </button>;

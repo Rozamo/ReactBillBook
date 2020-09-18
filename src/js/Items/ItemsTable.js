@@ -1,38 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import load_gif from '../../images/load.gif';
 import LoadData from '../Helper/API/LoadData';
 import TableHead from '../Helper/TableMaker/TableHead';
 import TableBody from '../Helper/TableMaker/TableBody';
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import BlueButton from '../BlueButton/BlueButton';
 
-export default class ItemsTable extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            error: null,
-            isLoaded: false,
-            items: []
-        };
-    }
-    async getData() {
-        const data = await LoadData(this.props.sidebar_choice);
+export default function ItemsTable() {
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [items, setItems] = useState([]);
+    async function getData() {
+        const data = await LoadData("items");
         if (data && data.entity === 'collection') {
-            this.setState({
-                isLoaded: true,
-                items: data.items
-            });
+            setIsLoaded(true);
+            setItems(data.items);
         }
         else if (data) {
-            this.setState({
-                error: data,
-                isLoaded: true
-            });
+            setError(data);
+            setIsLoaded(true);
         }
     }
-    componentDidMount() {
-        this.getData();
-    }
-    render() {
-        const { error, isLoaded, items } = this.state;
+    useEffect(() => {
+        getData();
+    });
+    function handleContent() {
         if (error)
             return <div>Error: {error.message}</div>;
         else if (!isLoaded)
@@ -42,4 +34,13 @@ export default class ItemsTable extends React.Component {
             {TableBody(items, 'name', 'description', 'amount', 'created_at')}
         </table>;
     }
+    return <div className="content">
+        <div className="top-panel">
+            <h1 id="title">Items</h1>
+            <Link to='/items/create'>
+                <BlueButton sidebar_choice="items" content_choice="list"/>
+            </Link>
+        </div>     
+        {handleContent()}        
+    </div>;
 }
