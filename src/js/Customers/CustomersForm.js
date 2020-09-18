@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import BlueButton from '../BlueButton/BlueButton';
 import PostData from '../Helper/API/PostData';
 import load_gif from '../../images/load.gif';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import floppy from '../BlueButton/floppy.png';
 import {useHistory} from 'react-router-dom';
 

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import BlueButton from '../BlueButton/BlueButton';
 import PostData from '../Helper/API/PostData';
 import load_gif from '../../images/load.gif';
-import {BrowserRouter as Router, Switch, Route, Link, Redirect, useLocation} from 'react-router-dom';
 import floppy from '../BlueButton/floppy.png';
 import {useHistory} from 'react-router-dom';
 
@@ -47,7 +45,6 @@ export default function ItemsForm() {
             <label htmlFor="name">Description</label>
             <textarea value={description} type="text" name="description" onChange={(event) => {setDescription(event.target.value)}}/>
             <br></br>
-            {/* <BlueButton sidebar_choice={this.props.sidebar_choice} content_choice={this.props.content_choice} handleSubmit={this.handleSubmit}/> */}
             <button type="button" onClick={handleSubmit} id="button" value="">
                 <img src={floppy} id="floppy" alt="Save"></img>
                 Save Item

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import {Link} from 'react-router-dom';
 import load_gif from '../../images/load.gif';
 import LoadData from '../Helper/API/LoadData';
 import TableHead from '../Helper/TableMaker/TableHead';
 import TableBody from '../Helper/TableMaker/TableBody';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import BlueButton from '../BlueButton/BlueButton';
 
 export default function ItemsTable() {
@@ -38,7 +38,7 @@ export default function ItemsTable() {
         <div className="top-panel">
             <h1 id="title">Customers</h1>
             <Link to='/customers/create'>
-                <BlueButton sidebar_choice="items" content_choice="list"/>
+                <BlueButton sidebar_choice="customers" content_choice="list"/>
             </Link>
         </div>     
         {handleContent()}        

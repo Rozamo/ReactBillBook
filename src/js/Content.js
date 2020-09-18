@@ -1,10 +1,10 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import SideBarItem from './SideBar/SideBarItem';
-import ItemsTable from './Items/ItemsTable';
-import ItemsForm from './Items/ItemsForm';
 import CustomersTable from './Customers/CustomersTable';
 import CustomersForm from './Customers/CustomersForm';
+import ItemsTable from './Items/ItemsTable';
+import ItemsForm from './Items/ItemsForm';
 
 export default function Content() {
     return <Router>

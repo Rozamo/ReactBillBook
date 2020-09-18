@@ -1,4 +1,3 @@
-
 import React from 'react';
 import person_icon from './person_icon';
 import star_icon from './star_icon';
