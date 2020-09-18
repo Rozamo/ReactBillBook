@@ -1,0 +1,165 @@
+select {
+    width: 100%;
+    border: none;
+    height: 40px;
+    text-align: center;
+    background: #5655d0;
+    color: white;
+}
+
+.panel-1 {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.inv-cust-panel {
+    overflow: auto;
+    width: 40%;
+    height: 107px;
+    padding: 7px;
+    border: 1px solid rgb(239, 243, 250); 
+    background-color: white;
+}
+
+.inv-cust-det {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between; 
+}
+
+#inv-cust-change {
+    border: none;
+    background: none;
+    height: 20px;
+    color: rgb(81, 77, 210);
+    font-size: medium;
+}
+
+select {
+    width: 100%;
+    border: none;
+}
+
+#add-item {
+    width: 100%;
+    height: 40px;
+    background: none;
+    border: none;
+    color: rgb(137, 133, 223);
+    font-size: medium;
+}
+
+#inv-item-tbl {
+    border-spacing: 0px 0px;
+    background-color: white;
+    border: 1px solid rgb(239, 243, 250);
+}
+
+#inv-item-tbl > tbody > tr > th {
+    border-bottom: 1px solid rgb(239, 243, 250);
+}
+
+#inv-item-tbl > tbody > tr > td {
+    border-top: 1px solid rgb(239, 243, 250);
+    border-bottom: 1px solid rgb(239, 243, 250);
+}
+
+.item-qty {
+    height: 45px;
+    width: 45px;
+    padding: 5px 7px;
+    border: 1px solid rgb(239, 243, 250); 
+    border-radius: 5px;
+}
+
+.inv-item-panel{
+    margin:20px 0px;
+}
+
+.panel-2{
+    margin:20px 0px;
+    height: 200px;
+}
+
+.notes{
+    margin: 20px 0px;
+    padding: 5px;
+    width: 40%;
+    float: left;
+}
+
+.item-total{
+    margin: 20px 0px;
+    width: 55%;
+    height: 125px;
+    float: right;
+    padding: 10px;
+    border: 1px solid lightblue;
+    overflow: auto;
+    background:white;
+}
+
+#description{
+    height: 100px;
+    width: 100%;
+}
+
+.fa,.fa-trash{
+    float: right;
+    visibility: visible;
+}
+.fa:hover{
+    cursor: pointer;
+}
+
+#add-item:hover{
+    cursor: pointer;
+}
+
+input, label {
+    display: block;
+    font-size: medium;
+}
+
+label {
+    margin-bottom: 5px;
+    margin-top: 20px;
+}
+
+input, textarea {
+    height: 37px; 
+    width: 300px;
+    margin-right: 30px;
+    padding: 0px 5px;
+    border: 2px solid rgb(236, 241, 249);
+    border-radius: 5px;
+}
+
+.customer-form {
+    background-color: white;
+    padding: 2% 5% 5% 5%;
+    margin-top: 25px;
+    border: 2px solid rgb(234, 238, 244);
+    border-radius: 7px;
+}
+
+.cust-panel-1 {
+    display: flex;
+    justify-content: left;
+    margin-top: 5px;
+}
+
+textarea {
+    height: 45px; 
+    margin-bottom: 17px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: large;
+}
+
+#floppy {
+    height: 16px;
+    width: 16px;
+    margin-right: 7px;
+}
