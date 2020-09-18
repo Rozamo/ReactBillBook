@@ -1,21 +1,30 @@
 import React from 'react';
-import person_icon from './person_icon';
-import star_icon from './star_icon';
-import file_icon from './file_icon';
+import personIcon from './personIcon';
+import starIcon from './starIcon';
+import fileIcon from './fileIcon';
 
-export default function SideBarItem(props) {
-    function icon(){
-        if (props.sidebar_choice === 'customers')
-            return person_icon;
-        else if (props.sidebar_choice === 'items')
-            return star_icon;
-        else if (props.sidebar_choice === 'invoices')
-            return file_icon;
-        else
-            return null;
+export default function SidebarItem(props) {
+    function icon() {
+        const sidebarChoice = props.sidebarChoice;
+        switch (sidebarChoice) {
+            case 'customers':
+                return personIcon;
+            case 'items':
+                return starIcon;
+            case 'invoices':
+                return fileIcon;
+            default:
+                return null;
+        }
     }
-    return <div className={props.cls}>
-        {icon()}
-        {props.value}
-    </div>;
+    function handleSidebarClick() {
+        if (!props.sidebarChoice.includes('active'))
+            props.changeSidebarChoice(props.cls);
+    }
+    return (
+        <div className={props.cls} onClick={handleSidebarClick}>
+            {icon()}
+            {props.value}
+        </div>
+    );
 }
