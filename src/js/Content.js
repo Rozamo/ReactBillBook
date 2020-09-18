@@ -7,13 +7,23 @@ import ItemsTable from './Items/ItemsTable';
 import ItemsForm from './Items/ItemsForm';
 
 export default function Content() {
-    const [sidebarChoice, setSidebarChoice] = useState('');
+    const param = window.location.href;
+    const [sidebarChoice, setSidebarChoice] = useState(() => {
+        if (param.includes('customers'))
+            return 'customers';
+        else if (param.includes('items'))
+            return 'items';
+        else if (param.includes('invoices'))
+            return 'invoices';
+        else
+            return '';
+    });
     function changeSidebarChoice(sidebarChoice) {
         setSidebarChoice(sidebarChoice);
     }
-    useEffect(() => {
-        console.log(sidebarChoice);
-    });
+    // useEffect(() => {
+    //     console.log(sidebarChoice);
+    // });
     return <Router>
         <div className="outside-box">
             <div className="side-bar">
