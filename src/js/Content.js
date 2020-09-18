@@ -38,8 +38,8 @@ export default function Content() {
                 <Route exact path='/' component={() => <div className="content"></div>}/>
                 <Route path='/customers/list' component={CustomersTable}/>
                 <Route path='/customers/create' component={CustomersForm}/>
-                <Route path='/items/list' exact component={ItemsTable}/>
-                <Route path='/items/create' exact component={ItemsForm}/>
+                <Route path='/items/list' component={ItemsTable}/>
+                <Route path='/items/create' component={ItemsForm}/>
             </Switch>
         </div>
     </Router>;

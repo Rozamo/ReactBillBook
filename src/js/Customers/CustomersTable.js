@@ -23,7 +23,7 @@ export default function CustomersTable() {
     }
     useEffect(() => {
         getData();
-    });
+    }, []);
     function handleContent() {
         if (error)
             return <div>Error: {error.message}</div>;
