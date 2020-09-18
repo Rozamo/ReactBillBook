@@ -6,6 +6,10 @@
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none;
+}
+
 body {
     background: lightsalmon;
     position: relative;
@@ -28,11 +32,11 @@ body {
     box-shadow: #5750d8 5px 5px;
 }
 
-.side-bar :nth-child(1) {
+.side-bar > a :nth-child(1) {
     margin-top: 15px;
 }
 
-.side-bar > a {
+.side-bar > a > div {
     font-size: 17px;
     text-align: center;
     padding: 5%;
@@ -43,22 +47,22 @@ body {
     align-items: center;
 }
 
-.side-bar > a:hover {
+.side-bar > a > div:hover {
     background-color: rgb(249, 251, 255);
     cursor: pointer;
 }
 
-.side-bar > div.active {
+.side-bar > a > div.active {
     background-color: rgb(249, 251, 255);
     color: rgb(81, 77, 210);
     border-left: 4px solid rgb(86, 85, 208);
 }
 
-.side-bar > div > svg {
+.side-bar > a > div > svg {
     fill: rgb(166, 172, 191);
 }
 
-.side-bar > div.active > svg {
+.side-bar > a > div.active > svg {
     fill: rgb(81, 77, 210);
 }
 

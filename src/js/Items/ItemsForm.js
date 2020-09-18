@@ -7,37 +7,34 @@ import floppy from '../BlueButton/floppy.png';
 import {useHistory} from 'react-router-dom';
 
 export default function ItemsForm() {
+    const history = useHistory();
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [amount, setAmount] = useState('');
     const currency = 'INR';
     const [isPosting, setIsPosting] = useState(false);
     function isValid() {
-        if (!/^[0-9]*.?[0-9]+$/.test(this.state.amount)) {
+        if (!/^[0-9]*.?[0-9]+$/.test(amount)) {
             alert('Amount must be valid');
             return false;
         }
         return true;
     }
-    function handleSubmit(event) {
-        console.log("sad");
-        // if (!this.isValid())
-        //     return;
-        // this.changeIsPosting(true);
-        // const new_obj = {};
-        // for (const i in this.state)
-        //     if (i === 'amount')
-        //         new_obj[i] = Number(this.state[i]) * 100;
-        //     else if (i !== 'isPosting')
-        //         new_obj[i] = this.state[i];
-        // const data = await PostData(new_obj, this.props.sidebar_choice);
-        // if (data.statusCode === 400)
-        //     alert(data.error.description);
-        // else if (data.entity === 'customer' || data.id)
-        //     this.props.changeContentChoice('list');
-        // else
-        //     alert(data);
-        // this.changeIsPosting(false);
+    async function handleSubmit() {
+        console.log("Da");
+        if (!isValid())
+            return;
+        setIsPosting(true);
+        const new_amount = Number(amount) * 100;
+        const new_obj = {name, description, amount: new_amount, currency};
+        const data = await PostData(new_obj, 'items');
+        if (data.statusCode === 400)
+            alert(data.error.description);
+        else if (data.entity === 'customer' || data.id)
+            history.push('/items/list');
+        else
+            alert(data);
+        setIsPosting(false);
     }
     function handleContent() {
         if (isPosting)
@@ -51,7 +48,7 @@ export default function ItemsForm() {
             <textarea value={description} type="text" name="description" onChange={(event) => {setDescription(event.target.value)}}/>
             <br></br>
             {/* <BlueButton sidebar_choice={this.props.sidebar_choice} content_choice={this.props.content_choice} handleSubmit={this.handleSubmit}/> */}
-            <button onClick={event => {handleSubmit(event)}} id="button" value="">
+            <button type="button" onClick={handleSubmit} id="button" value="">
                 <img src={floppy} id="floppy" alt="Save"></img>
                 Save Item
             </button>

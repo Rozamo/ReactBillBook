@@ -1,11 +1,10 @@
 import React from 'react';
-import SideBarItem from './SideBar/SideBarItem';
-import Customers from './Customers/Customers';
-import Items from './Items/Items';
-
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import SideBarItem from './SideBar/SideBarItem';
 import ItemsTable from './Items/ItemsTable';
 import ItemsForm from './Items/ItemsForm';
+import CustomersTable from './Customers/CustomersTable';
+import CustomersForm from './Customers/CustomersForm';
 
 export default function Content() {
     return <Router>
@@ -20,7 +19,8 @@ export default function Content() {
             </div>
             <Switch>
                 <Route exact path='/' component={() => <div className="content"></div>}/>
-                <Route exact path='/customers/list' component={Customers}/>
+                <Route exact path='/customers/list' component={CustomersTable}/>
+                <Route exact path='/customers/create' component={CustomersForm}/>
                 <Route exact path='/items/list' exact component={ItemsTable}/>
                 <Route exact path='/items/create' exact component={ItemsForm}/>
             </Switch>
