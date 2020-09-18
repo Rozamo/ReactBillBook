@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import PostData from '../Helper/API/PostData';
-import load_gif from '../../images/load.gif';
+import loadingGif from '../../images/loading.gif';
 import floppy from '../BlueButton/floppy.png';
 import {useHistory} from 'react-router-dom';
+import BlueButton from '../BlueButton/BlueButton';
 
 export default function ItemsForm() {
     const history = useHistory();
@@ -18,8 +19,8 @@ export default function ItemsForm() {
         }
         return true;
     }
-    async function handleSubmit() {
-        console.log("Da");
+    async function handleFormSubmit(event) {
+        event.preventDefault();
         if (!isValid())
             return;
         setIsPosting(true);
@@ -36,8 +37,8 @@ export default function ItemsForm() {
     }
     function handleContent() {
         if (isPosting)
-            return <img src={load_gif} alt="Loading...." id="load-img"></img>;
-        else return <form className="customer-form" style={{width: "50%"}}>
+            return <img src={loadingGif} alt="Loading...." id="load-img"></img>;
+        else return <form className="customer-form" style={{width: "50%"}} onSubmit={handleFormSubmit}>
             <label htmlFor="name">Name</label>
             <input value={name} type="text" name="name" onChange={(event) => {setName(event.target.value)}}/>
             <label htmlFor="amount">Price</label>
@@ -45,10 +46,7 @@ export default function ItemsForm() {
             <label htmlFor="name">Description</label>
             <textarea value={description} type="text" name="description" onChange={(event) => {setDescription(event.target.value)}}/>
             <br></br>
-            <button type="button" onClick={handleSubmit} id="button" value="">
-                <img src={floppy} id="floppy" alt="Save"></img>
-                Save Item
-            </button>
+            <BlueButton sidebarChoice='items' contentChoice='create' type='submit'/>
         </form>;
     }
     return <div className="content">

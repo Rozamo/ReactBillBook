@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
-import load_gif from '../../images/load.gif';
+import loadingGif from '../../images/loading.gif';
 import LoadData from '../Helper/API/LoadData';
 import TableHead from '../Helper/TableMaker/TableHead';
 import TableBody from '../Helper/TableMaker/TableBody';
@@ -28,7 +28,7 @@ export default function ItemsTable() {
         if (error)
             return <div>Error: {error.message}</div>;
         else if (!isLoaded)
-            return <img src={load_gif} alt="Loading...." id="load-img"></img>;
+            return <img src={loadingGif} alt="Loading...." id="load-img"></img>;
         else return <table className="inv-table" id="inv-table">
             {TableHead('NAME', 'DESCRIPTION', 'PRICE', 'ADDED ON')}
             {TableBody(items, 'name', 'description', 'amount', 'created_at')}
@@ -38,7 +38,7 @@ export default function ItemsTable() {
         <div className="top-panel">
             <h1 id="title">Items</h1>
             <Link to='/items/create'>
-                <BlueButton sidebar_choice="items" content_choice="list"/>
+                <BlueButton sidebarChoice="items" contentChoice="list"/>
             </Link>
         </div>     
         {handleContent()}        

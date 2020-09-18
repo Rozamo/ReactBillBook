@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PostData from '../Helper/API/PostData';
-import load_gif from '../../images/load.gif';
-import floppy from '../BlueButton/floppy.png';
+import loadingGif from '../../images/loading.gif';
 import {useHistory} from 'react-router-dom';
+import BlueButton from '../BlueButton/BlueButton';
 
 export default function CustomersForm() {
     const history = useHistory();
@@ -25,16 +25,16 @@ export default function CustomersForm() {
         }
         return true;
     }
-    async function handleSubmit() {
+    async function handleFormSubmit(event) {
+        event.preventDefault();
         if (!isValid())
             return;
         setIsPosting(true);
-        const new_obj = {name, contact, email};
-        console.log(new_obj);
-        const data = await PostData(new_obj, 'customers');
+        const obj = {name, contact, email};
+        const data = await PostData(obj, 'customers');
         if (data.statusCode === 400)
             alert(data.error.description);
-        else if (data.entity === 'customer' || data.id)
+        else if (data.entity === 'customer')
             history.push('/customers/list');
         else
             alert(data);
@@ -42,9 +42,9 @@ export default function CustomersForm() {
     }
     function handleContent() {
         if (isPosting)
-            return <img src={load_gif} alt="Loading...." id="load-img"></img>;
+            return <img src={loadingGif} alt="Loading...." id="load-img"></img>;
         else
-            return <form className="customer-form">
+            return <form className="customer-form" onSubmit={handleFormSubmit}>
                 <div className="cust-panel-1">
                     <div>
                         <label htmlFor="name">Name</label>
@@ -58,10 +58,7 @@ export default function CustomersForm() {
                 <label htmlFor="email">Email</label>
                 <div className="cust-panel-1">
                     <input value={email} type="email" name="email" onChange={(event) => {setEmail(event.target.value)}}/>
-                        <button type="button" id="button" value="" onClick={handleSubmit}>
-                            <img src={floppy} id="floppy" alt="Save"></img>
-                            Save Customer
-                        </button>
+                        <BlueButton sidebarChoice='customers' contentChoice='create' type='submit'/>
                     </div>
             </form>;
     }      
