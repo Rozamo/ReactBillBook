@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
-import './css/style.css';
-import './css/createInvoice.css';
+import './css/style1.css';
+import './css/style2.css';
 import App from './components/App';
 
 const domContainer = document.querySelector('#root');
