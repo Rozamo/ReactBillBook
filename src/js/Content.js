@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
-import SidebarItem from './SideBar/SidebarItem';
+import SidebarItem from './Sidebar/SidebarItem';
 import CustomersTable from './Customers/CustomersTable';
 import CustomersForm from './Customers/CustomersForm';
 import ItemsTable from './Items/ItemsTable';

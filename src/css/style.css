@@ -107,6 +107,24 @@ table {
     border-spacing: 0 13px;
 }
 
+tbody > tr:first-child > td:first-child {
+    border: 2px solid rgb(236, 241, 249);
+    border-right-style: none;
+    border-radius: 5px;
+}
+
+tbody > tr:first-child > td:last-child {
+    border: 2px solid rgb(236, 241, 249);
+    border-left-style: none;
+    border-radius: 5px;
+}
+
+tbody > tr:first-child > td:not(:first-child):not(:last-child) {
+    border: 2px solid rgb(236, 241, 249);
+    border-left-style: none;
+    border-right-style: none;
+}
+
 th {
     text-align: left;
     padding: 8px;

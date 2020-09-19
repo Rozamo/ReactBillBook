@@ -5,7 +5,7 @@ import INR from '../Format/INR';
 export default function TableBody(items, ...arr) {
     return <tbody>
         {items.map(item => (
-            <tr key={item.id}>
+            <tr key={item.id} id={item.id}>
                 {arr.map(element => {
                     if (element === 'amount')
                         return <td>{INR.format(item[element] / 100)}</td>;

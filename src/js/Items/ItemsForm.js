@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
+import {useHistory} from 'react-router-dom';
 import PostData from '../Helper/API/PostData';
 import loadingGif from '../../images/loading.gif';
-import floppy from '../BlueButton/floppy.png';
-import {useHistory} from 'react-router-dom';
 import BlueButton from '../BlueButton/BlueButton';
 
 export default function ItemsForm() {
@@ -30,7 +29,7 @@ export default function ItemsForm() {
         if (data.statusCode === 400)
             alert(data.error.description);
         else if (data.entity === 'customer' || data.id)
-            history.push('/items/list');
+            history.push(`/items/list/${data.id}`);
         else
             alert(data);
         setIsPosting(false);
