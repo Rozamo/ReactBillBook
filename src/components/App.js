@@ -5,6 +5,7 @@ import CustomersTable from './customers/CustomersTable';
 import CustomersForm from './customers/CustomersForm';
 import ItemsTable from './items/ItemsTable';
 import ItemsForm from './items/ItemsForm';
+import Invoices from './invoices/Invoices';
 
 export default function App() {
   const param = window.location.href;
@@ -34,6 +35,9 @@ export default function App() {
           <Link to='/items/list'>
             <SidebarItem value="Items" sidebarChoice="items" cls={"items".concat(sidebarChoice === "items" ? " active" : "")} changeSidebarChoice={changeSidebarChoice} />
           </Link>
+          <Link to='/invoices'>
+            <SidebarItem value="Invoices" sidebarChoice="invoices" cls={"invoices".concat(sidebarChoice === "invoices" ? " active" : "")} changeSidebarChoice={changeSidebarChoice} />
+          </Link>
         </div>
         <Switch>
           <Route exact path='/' component={() => <div className="content"></div>} />
@@ -41,6 +45,7 @@ export default function App() {
           <Route path='/customers/create' component={CustomersForm} />
           <Route path='/items/list' component={ItemsTable} />
           <Route path='/items/create' component={ItemsForm} />
+          <Route exact path="/invoices" component={Invoices}></Route>
         </Switch>
       </div>
     </Router>

@@ -1,6 +1,6 @@
 import React from 'react';
-import floppy from './floppy.png';
-import plus from './plus.png';
+import floppy from '../../images/floppy.png';
+import plus from '../../images/plus.png';
 
 export default function BlueButton(props) {
     const {sidebarChoice, contentChoice, type} = props;
