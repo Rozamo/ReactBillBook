@@ -1,6 +1,6 @@
 import React from 'react';
-import TransformDate from '../Format/TransformDate';
-import INR from '../Format/INR';
+import TransformDate from '../utils/TransformDate';
+import INR from '../utils/INR';
 
 export default function TableBody(items, ...arr) {
     return <tbody>

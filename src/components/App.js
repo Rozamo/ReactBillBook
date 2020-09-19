@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
-import SidebarItem from './Sidebar/SidebarItem';
-import CustomersTable from './Customers/CustomersTable';
-import CustomersForm from './Customers/CustomersForm';
-import ItemsTable from './Items/ItemsTable';
-import ItemsForm from './Items/ItemsForm';
+import SidebarItem from './sidebar/SidebarItem';
+import CustomersTable from './customers/CustomersTable';
+import CustomersForm from './customers/CustomersForm';
+import ItemsTable from './items/ItemsTable';
+import ItemsForm from './items/ItemsForm';
 
-export default function Content() {
+export default function App() {
     const param = window.location.href;
     const [sidebarChoice, setSidebarChoice] = useState(() => {
         if (param.includes('customers'))

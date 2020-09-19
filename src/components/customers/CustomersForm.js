@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import PostData from '../Helper/API/PostData';
+import PostData from '../helper/api/PostData';
 import loadingGif from '../../images/loading.gif';
 import {useHistory} from 'react-router-dom';
-import BlueButton from '../BlueButton/BlueButton';
+import BlueButton from '../bluebutton/BlueButton';
 
 export default function CustomersForm() {
     const history = useHistory();
