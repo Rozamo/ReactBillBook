@@ -106,7 +106,7 @@ table {
     border-spacing: 0 13px;
 }
 
-tbody > tr:first-child > td:first-child {
+/* tbody > tr:first-child > td:first-child {
     border: 2px solid rgb(236, 241, 249);
     border-right-style: none;
     border-radius: 5px;
@@ -122,6 +122,35 @@ tbody > tr:first-child > td:not(:first-child):not(:last-child) {
     border: 2px solid rgb(236, 241, 249);
     border-left-style: none;
     border-right-style: none;
+} */
+
+.newTD {
+    animation-name: animation;
+    animation-duration: 3s;
+}
+
+.firstTD {
+    border: 2px solid rgb(236, 241, 249);
+    border-right-style: none;
+    border-radius: 5px 0px 0px 5px;
+}
+
+.middleTD {
+    border: 2px solid rgb(236, 241, 249);
+    border-left-style: none;
+    border-right-style: none;
+}
+
+.lastTD {
+    border: 2px solid rgb(236, 241, 249);
+    border-left-style: none;
+    border-radius: 0px 5px 5px 0px;
+}
+
+@keyframes animation {
+    0% {border-color: rgb(236, 241, 249);}
+    50% {border-color: rgb(86, 85, 208);}
+    100% {border-color: rgb(236, 241, 249);}
 }
 
 th {

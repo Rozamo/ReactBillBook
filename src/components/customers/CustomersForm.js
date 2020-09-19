@@ -37,7 +37,7 @@ export default function CustomersForm() {
     if (data.statusCode === 400)
       alert(data.error.description);
     else if (data.entity === 'customer')
-      history.push('/customers/list');
+      history.push(`/customers/list/${data.id}`);
     else
       alert(data);
     setIsPosting(false);

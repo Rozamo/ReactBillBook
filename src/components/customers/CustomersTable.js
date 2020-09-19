@@ -32,7 +32,11 @@ export default function CustomersTable() {
       return <div>Error: {error.message}</div>;
     else if (!isLoaded)
       return <img src={loadingGif} alt="Loading...." id="load-img"></img>;
-    else return Table(items, ['NAME', 'PHONE', 'EMAIL', 'CREATED ON'], ['name', 'contact', 'email', 'created_at']);
+    else {
+      const path = window.location.pathname;
+      const pathElements = path.split('/');
+      return Table(items, ['NAME', 'PHONE', 'EMAIL', 'CREATED ON'], ['name', 'contact', 'email', 'created_at'], pathElements[pathElements.length - 1]);
+    }
   }
   
   return (
