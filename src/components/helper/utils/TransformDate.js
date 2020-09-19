@@ -1,4 +1,3 @@
-import React from 'react';
 
 export default function TransformDate(date) {
     const newDate = new Date(date * 1000);

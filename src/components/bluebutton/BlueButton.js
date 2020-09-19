@@ -4,6 +4,7 @@ import plus from './plus.png';
 
 export default function BlueButton(props) {
     const {sidebarChoice, contentChoice, type} = props;
+
     function renderButtonName() {    
         if (sidebarChoice && contentChoice) {
             if (contentChoice === 'list') {
@@ -16,15 +17,17 @@ export default function BlueButton(props) {
                 return `Save ${sidebarChoice.charAt(0).toUpperCase()}${sidebarChoice.slice(1, sidebarChoice.length - 1)}`;
         }
     }
-    function icon() {
+
+    function renderIcon() {
         if (contentChoice === 'list')
             return <img src={plus} id="floppy" alt="New"></img>;
         else if (contentChoice === 'create')
             return <img src={floppy} id="floppy" alt="Save"></img>;
         return null;
     }
+
     return <button type={type ? type : 'button'} id="button" value="">
-        {icon()}
+        {renderIcon()}
         {renderButtonName()}
     </button>;
 }

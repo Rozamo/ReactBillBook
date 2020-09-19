@@ -1,5 +1,3 @@
-import { inRange } from 'lodash';
-import React from 'react';
 
 const INR = new Intl.NumberFormat('en-IN', { 
 	style: 'currency', 
