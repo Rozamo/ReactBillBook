@@ -34,8 +34,8 @@ export default function CustomersTable() {
       return <img src={loadingGif} alt="Loading...." id="load-img"></img>;
     else {
       const path = window.location.pathname;
-      const pathElements = path.split('/');
-      return Table(items, ['NAME', 'PHONE', 'EMAIL', 'CREATED ON'], ['name', 'contact', 'email', 'created_at'], pathElements[pathElements.length - 1]);
+      const submitSuccess = path.includes('success') ? true : false;
+      return Table(items, ['NAME', 'PHONE', 'EMAIL', 'CREATED ON'], ['name', 'contact', 'email', 'created_at'], submitSuccess);
     }
   }
   

@@ -33,8 +33,8 @@ export default function ItemsTable() {
       return <img src={loadingGif} alt="Loading...." id="load-img"></img>;
     else {
       const path = window.location.pathname;
-      const pathElements = path.split('/');
-      return Table(items, ['NAME', 'DESCRIPTION', 'PRICE', 'ADDED ON'], ['name', 'description', 'amount', 'created_at'], pathElements[pathElements.length - 1]);
+      const submitSuccess = path.includes('success') ? true : false;
+      return Table(items, ['NAME', 'DESCRIPTION', 'PRICE', 'ADDED ON'], ['name', 'description', 'amount', 'created_at'], submitSuccess);
     }
   }
   

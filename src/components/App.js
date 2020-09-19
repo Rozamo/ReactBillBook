@@ -30,13 +30,13 @@ export default function App() {
       <div className="outside-box">
         <div className="side-bar">
           <Link to='/customers/list'>
-            <SidebarItem value="Customers" sidebarChoice="customers" cls={"customers".concat(sidebarChoice === "customers" ? " active" : "")} changeSidebarChoice={changeSidebarChoice} />
+            <SidebarItem value="Customers" sidebarChoice="customers" classValue={"customers".concat(sidebarChoice === "customers" ? " active" : "")} changeSidebarChoice={changeSidebarChoice} />
           </Link>
           <Link to='/items/list'>
-            <SidebarItem value="Items" sidebarChoice="items" cls={"items".concat(sidebarChoice === "items" ? " active" : "")} changeSidebarChoice={changeSidebarChoice} />
+            <SidebarItem value="Items" sidebarChoice="items" classValue={"items".concat(sidebarChoice === "items" ? " active" : "")} changeSidebarChoice={changeSidebarChoice} />
           </Link>
           <Link to='/invoices'>
-            <SidebarItem value="Invoices" sidebarChoice="invoices" cls={"invoices".concat(sidebarChoice === "invoices" ? " active" : "")} changeSidebarChoice={changeSidebarChoice} />
+            <SidebarItem value="Invoices" sidebarChoice="invoices" classValue={"invoices".concat(sidebarChoice === "invoices" ? " active" : "")} changeSidebarChoice={changeSidebarChoice} />
           </Link>
         </div>
         <Switch>
