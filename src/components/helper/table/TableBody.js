@@ -2,7 +2,7 @@ import React from 'react';
 import TransformDate from '../utils/TransformDate';
 import INR from '../utils/INR';
 
-export default function TableBody(items, ...arr) {
+export default function TableBody(items, arr) {
   return (
     <tbody>
       {items.map(item => (
