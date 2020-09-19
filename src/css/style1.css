@@ -1,9 +1,13 @@
-@import "createInvoice.css";
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+a, a:visited, a:hover, a:active {
+    text-decoration: none;
+    color: inherit;
 }
 
 body {
@@ -28,11 +32,11 @@ body {
     box-shadow: #5750d8 5px 5px;
 }
 
-.side-bar :nth-child(1) {
-    margin-top: 15px;
+.side-bar > a:nth-child(1) div {
+    margin-top: 30px;
 }
 
-.side-bar > div {
+.side-bar > a div {
     font-size: 17px;
     text-align: center;
     padding: 5%;
@@ -43,22 +47,22 @@ body {
     align-items: center;
 }
 
-.side-bar > div:hover {
+.side-bar > a div:hover {
     background-color: rgb(249, 251, 255);
     cursor: pointer;
 }
 
-.side-bar > div.active {
+.side-bar > a div.active {
     background-color: rgb(249, 251, 255);
     color: rgb(81, 77, 210);
     border-left: 4px solid rgb(86, 85, 208);
 }
 
-.side-bar > div > svg {
+.side-bar > a > div > svg {
     fill: rgb(166, 172, 191);
 }
 
-.side-bar > div.active > svg {
+.side-bar > a div.active svg {
     fill: rgb(81, 77, 210);
 }
 
@@ -100,6 +104,24 @@ table {
     margin-top: 20px;
     width: 100%;
     border-spacing: 0 13px;
+}
+
+tbody > tr:first-child > td:first-child {
+    border: 2px solid rgb(236, 241, 249);
+    border-right-style: none;
+    border-radius: 5px;
+}
+
+tbody > tr:first-child > td:last-child {
+    border: 2px solid rgb(236, 241, 249);
+    border-left-style: none;
+    border-radius: 5px;
+}
+
+tbody > tr:first-child > td:not(:first-child):not(:last-child) {
+    border: 2px solid rgb(236, 241, 249);
+    border-left-style: none;
+    border-right-style: none;
 }
 
 th {
