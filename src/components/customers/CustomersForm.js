@@ -36,8 +36,8 @@ export default function CustomersForm() {
     const data = await PostData(obj, 'customers');
     if (data.statusCode === 400)
       alert(data.error.description);
-    else if (data.entity === 'customer')
-      history.push('/customers/list');
+    else if (data.entity === 'customer' || data.id)
+      history.push('/customers/list', {submitSuccess: true});
     else
       alert(data);
     setIsPosting(false);
