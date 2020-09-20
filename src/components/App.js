@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route, Link, useHistory } from 'react-router-dom';
 import SidebarItem from './sidebar/SidebarItem';
 import CustomersTable from './customers/CustomersTable';
 import CustomersForm from './customers/CustomersForm';
@@ -9,37 +9,38 @@ import Invoices from './invoices/Invoices';
 
 export default function App() {
   const param = window.location.href;
-  const [sidebarChoice, setSidebarChoice] = useState(() => {
-    if (param.includes('customers'))
+  const history = useHistory();
+  const [sidebarChoice, setSidebarChoice] = useState(getCurrentSidebarChoice(param));
+
+  function getCurrentSidebarChoice(path) {
+    if (path.includes('customers'))
       return 'customers';
-    else if (param.includes('items'))
+    else if (path.includes('items'))
       return 'items';
-    else if (param.includes('invoices'))
+    else if (path.includes('invoices'))
       return 'invoices';
     else
       return '';
-  });
-
-  function changeSidebarChoice(sidebarChoice) {
-    setSidebarChoice(sidebarChoice);
   }
 
-  // useEffect(() => {
-  //     console.log(sidebarChoice);
-  // });
+  useEffect(() => {
+      history.listen(location => {
+        if (location && location.pathname)
+          setSidebarChoice(getCurrentSidebarChoice(location.pathname));
+      });
+  }, []);
   
   return (
-    <Router>
       <div className="outside-box">
         <div className="side-bar">
           <Link to='/customers/list'>
-            <SidebarItem value="Customers" sidebarChoice="customers" classValue={"customers".concat(sidebarChoice === "customers" ? " active" : "")} changeSidebarChoice={changeSidebarChoice} />
+            <SidebarItem value="Customers" sidebarChoice="customers" classValue={"customers".concat(sidebarChoice === "customers" ? " active" : "")} />
           </Link>
           <Link to='/items/list'>
-            <SidebarItem value="Items" sidebarChoice="items" classValue={"items".concat(sidebarChoice === "items" ? " active" : "")} changeSidebarChoice={changeSidebarChoice} />
+            <SidebarItem value="Items" sidebarChoice="items" classValue={"items".concat(sidebarChoice === "items" ? " active" : "")} />
           </Link>
           <Link to='/invoices'>
-            <SidebarItem value="Invoices" sidebarChoice="invoices" classValue={"invoices".concat(sidebarChoice === "invoices" ? " active" : "")} changeSidebarChoice={changeSidebarChoice} />
+            <SidebarItem value="Invoices" sidebarChoice="invoices" classValue={"invoices".concat(sidebarChoice === "invoices" ? " active" : "")} />
           </Link>
         </div>
         <Switch>
@@ -51,6 +52,5 @@ export default function App() {
           <Route exact path="/invoices" component={Invoices}></Route>
         </Switch>
       </div>
-    </Router>
   );
 }

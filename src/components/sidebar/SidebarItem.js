@@ -4,7 +4,7 @@ import starIcon from './starIcon';
 import fileIcon from './fileIcon';
 
 export default function SidebarItem(props) {
-  const { sidebarChoice, value, classValue, changeSidebarChoice } = props;
+  const { sidebarChoice, value, classValue } = props;
 
   function renderIcon() {
     switch (sidebarChoice) {
@@ -19,13 +19,8 @@ export default function SidebarItem(props) {
     }
   }
 
-  function handleSidebarClick() {
-    if (!classValue.includes('active'))
-      changeSidebarChoice(props.classValue);
-  }
-
   return (
-    <div className={classValue} onClick={handleSidebarClick}>
+    <div className={classValue}>
       {renderIcon()}
       {value}
     </div>
