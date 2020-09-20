@@ -19,12 +19,15 @@ export default function App() {
     else
       return '';
   });
+
   function changeSidebarChoice(sidebarChoice) {
     setSidebarChoice(sidebarChoice);
   }
+
   // useEffect(() => {
   //     console.log(sidebarChoice);
   // });
+  
   return (
     <Router>
       <div className="outside-box">

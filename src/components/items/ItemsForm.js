@@ -22,7 +22,6 @@ export default function ItemsForm() {
 
   async function handleFormSubmit(event) {
     event.preventDefault();
-    console.log('def', history);
     if (!isValid())
       return;
     setIsPosting(true);
