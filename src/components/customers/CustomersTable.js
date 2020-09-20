@@ -12,7 +12,7 @@ export default function CustomersTable(props) {
 
   async function getData() {
     const data = await LoadData("customers");
-
+    
     if (data && data.entity === 'collection') {
       setIsLoaded(true);
       setItems(data.items);
@@ -28,7 +28,6 @@ export default function CustomersTable(props) {
   }, []);
 
   function handleContent() {
-    console.log(props.location);
     if (error)
       return <div>Error: {error.message}</div>;
     else if (!isLoaded)
