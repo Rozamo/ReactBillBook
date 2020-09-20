@@ -31,7 +31,7 @@ export default function ItemsForm() {
     if (data.statusCode === 400)
       alert(data.error.description);
     else if (data.entity === 'item' || data.id)
-      history.push('/items/list/success');
+      history.push('/items/list', {submitSuccess: true});
     else
       alert(data);
     setIsPosting(false);

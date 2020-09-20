@@ -5,7 +5,7 @@ import LoadData from '../helper/api/LoadData';
 import BlueButton from '../bluebutton/BlueButton';
 import Table from '../helper/table/Table';
 
-export default function CustomersTable() {
+export default function CustomersTable(props) {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
@@ -28,13 +28,13 @@ export default function CustomersTable() {
   }, []);
 
   function handleContent() {
+    console.log(props.location);
     if (error)
       return <div>Error: {error.message}</div>;
     else if (!isLoaded)
       return <img src={loadingGif} alt="Loading...." id="load-img"></img>;
     else {
-      const path = window.location.pathname;
-      const submitSuccess = path.includes('success') ? true : false;
+      const submitSuccess = props.location.state ? props.location.state.submitSuccess : false;
       return Table(items, ['NAME', 'PHONE', 'EMAIL', 'CREATED ON'], ['name', 'contact', 'email', 'created_at'], submitSuccess);
     }
   }

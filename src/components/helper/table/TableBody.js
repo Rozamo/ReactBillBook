@@ -4,15 +4,6 @@ import INR from '../utils/INR';
 
 export default function TableBody(items, arr, submitSuccess) {
   function handleClassName(itemIndex, arrIndex) {
-    // if (idToMatch === newItemID) {
-    //   if (index === 0)
-    //     return 'newTD firstTD';
-    //   else if (index === arr.length - 1)
-    //     return 'newTD lastTD';
-    //   else
-    //     return 'newTD middleTD';
-    // }
-    // return null;
     if (submitSuccess && itemIndex === 0) {
       switch(arrIndex) {
         case 0:
