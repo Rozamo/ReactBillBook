@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Switch, Route, Link, useHistory } from 'react-router-dom';
 import SidebarItem from './sidebar/SidebarItem';
 import CustomersTable from './customers/CustomersTable';
