@@ -24,16 +24,14 @@ export default function ItemsForm() {
 		event.preventDefault();
 		if (!isValid()) return;
 		setIsPosting(true);
-
-		const new_amount = Number(amount) * 100;
-		const obj = { name, description, amount: new_amount, currency };
-		const data = await PostData(obj, "items");
-
-		if (data.statusCode === 400) alert(data.error.description);
-		else if (data.entity === "item" || data.id)
+		const newAmount = Number(amount) * 100;
+		const dataToPost = { name, description, amount: newAmount, currency };
+		const responseData = await PostData(dataToPost, "items");
+		if (responseData.statusCode === 400) alert(responseData.error.description);
+		else if (responseData.entity === "item" || responseData.id) {
+			setIsPosting(false);
 			history.push("/items/list", { submitSuccess: true });
-		else alert(data);
-
+		} else alert(responseData);
 		setIsPosting(false);
 	}
 

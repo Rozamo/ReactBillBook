@@ -32,14 +32,16 @@ export default function CustomersForm() {
     if (!isValid())
       return;
     setIsPosting(true);
-    const obj = { name, contact, email };
-    const data = await PostData(obj, 'customers');
-    if (data.statusCode === 400)
-      alert(data.error.description);
-    else if (data.entity === 'customer' || data.id)
+    const dataToPost = { name, contact, email };
+    const responseData = await PostData(dataToPost, 'customers');
+    if (responseData.statusCode === 400)
+      alert(responseData.error.description);
+    else if (responseData.entity === 'customer' || responseData.id) {
+      setIsPosting(false);
       history.push('/customers/list', {submitSuccess: true});
+    }
     else
-      alert(data);
+      alert(responseData);
     setIsPosting(false);
   }
 

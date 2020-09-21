@@ -29,6 +29,11 @@ export default function App() {
 		});
 	}, []);
 
+	history.listen((location) => {
+		if (location && location.pathname)
+			setSidebarChoice(getCurrentSidebarChoice(location.pathname));
+	});
+
 	return (
 		<div className="outside-box">
 			<div className="side-bar">

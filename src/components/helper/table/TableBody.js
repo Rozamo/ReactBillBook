@@ -3,6 +3,7 @@ import TransformDate from '../utils/TransformDate';
 import INR from '../utils/INR';
 
 export default function TableBody(items, arr, submitSuccess) {
+
   function handleClassName(itemIndex, arrIndex) {
     if (submitSuccess && itemIndex === 0) {
       switch(arrIndex) {
@@ -15,17 +16,18 @@ export default function TableBody(items, arr, submitSuccess) {
       }
     }
   }
+
   return (
     <tbody>
       {items.map((item, itemIndex) => (
         <tr key={item.id}>
           {arr.map((element, arrIndex) => {
             if (element === 'amount')
-              return <td className={handleClassName(itemIndex, arrIndex)} >{INR.format(item[element] / 100)}</td>;
+              return <td key={arrIndex} className={handleClassName(itemIndex, arrIndex)} >{INR.format(item[element] / 100)}</td>;
             else if (element === 'created_at')
-              return <td className={handleClassName(itemIndex, arrIndex)} >{TransformDate(item[element])}</td>;
+              return <td key={arrIndex} className={handleClassName(itemIndex, arrIndex)} >{TransformDate(item[element])}</td>;
             else
-              return <td className={handleClassName(itemIndex, arrIndex)} >{item[element]}</td>;
+              return <td key={arrIndex} className={handleClassName(itemIndex, arrIndex)} >{item[element]}</td>;
           })}
         </tr>
       ))}
