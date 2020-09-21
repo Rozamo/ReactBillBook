@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Switch, Route, Link, useHistory } from 'react-router-dom';
 import SidebarItem from './sidebar/SidebarItem';
 import CustomersTable from './customers/CustomersTable';
@@ -23,12 +23,10 @@ export default function App() {
       return '';
   }
 
-  useEffect(() => {
-      history.listen(location => {
-        if (location && location.pathname)
-          setSidebarChoice(getCurrentSidebarChoice(location.pathname));
-      });
-  }, []);
+  history.listen(location => {
+    if (location && location.pathname)
+      setSidebarChoice(getCurrentSidebarChoice(location.pathname));
+  });
   
   return (
       <div className="outside-box">
