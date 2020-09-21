@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import personIcon from './personIcon';
 import starIcon from './starIcon';
 import fileIcon from './fileIcon';
@@ -26,3 +27,9 @@ export default function SidebarItem(props) {
     </div>
   );
 }
+
+SidebarItem.propTypes = {
+  sidebarChoice: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  classValue: PropTypes.string.isRequired,
+};

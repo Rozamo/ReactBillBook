@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import PostData from '../helper/api/PostData';
 import loadingGif from '../../images/loading.gif';
-import { useHistory } from 'react-router-dom';
 import BlueButton from '../bluebutton/BlueButton';
 
 export default function CustomersForm() {
@@ -29,45 +29,39 @@ export default function CustomersForm() {
 
   async function handleFormSubmit(event) {
     event.preventDefault();
-    if (!isValid())
-      return;
+    if (!isValid()) return;
     setIsPosting(true);
     const dataToPost = { name, contact, email };
     const responseData = await PostData(dataToPost, 'customers');
-    if (responseData.statusCode === 400)
-      alert(responseData.error.description);
+    if (responseData.statusCode === 400) alert(responseData.error.description);
     else if (responseData.entity === 'customer' || responseData.id) {
       setIsPosting(false);
-      history.push('/customers/list', {submitSuccess: true});
-    }
-    else
-      alert(responseData);
+      history.push('/customers/list', { submitSuccess: true });
+    } else alert(responseData);
     setIsPosting(false);
   }
 
   function handleContent() {
-    if (isPosting)
-      return <img src={loadingGif} alt="Loading...." id="load-img"></img>;
-    else
-      return (
-        <form className="customer-form" onSubmit={handleFormSubmit}>
-          <div className="cust-panel-1">
-            <div>
-              <label htmlFor="name">Name</label>
-              <input value={name} type="text" name="name" onChange={(event) => { setName(event.target.value) }} required />
-            </div>
-            <div>
-              <label htmlFor="contact">Phone</label>
-              <input value={contact} type="text" name="contact" onChange={(event) => { setContact(event.target.value) }} />
-            </div>
+    if (isPosting) return <img src={loadingGif} alt="Loading...." id="load-img" />;
+    return (
+      <form className="customer-form" onSubmit={handleFormSubmit}>
+        <div className="cust-panel-1">
+          <div>
+            <label htmlFor="name">Name</label>
+            <input value={name} type="text" name="name" onChange={(event) => { setName(event.target.value); }} required />
           </div>
-          <label htmlFor="email">Email</label>
-          <div className="cust-panel-1">
-            <input value={email} type="email" name="email" onChange={(event) => { setEmail(event.target.value) }} />
-            <BlueButton sidebarChoice='customers' contentChoice='create' type='submit' />
+          <div>
+            <label htmlFor="contact">Phone</label>
+            <input value={contact} type="text" name="contact" onChange={(event) => { setContact(event.target.value); }} />
           </div>
-        </form>
-      );
+        </div>
+        <label htmlFor="email">Email</label>
+        <div className="cust-panel-1">
+          <input value={email} type="email" name="email" onChange={(event) => { setEmail(event.target.value); }} />
+          <BlueButton sidebarChoice="customers" contentChoice="create" type="submit" />
+        </div>
+      </form>
+    );
   }
 
   return (
