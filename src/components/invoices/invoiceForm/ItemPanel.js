@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AddItemIcon from "./icons/AddItemIcon";
+import AddItemIcon from "../icons/AddItemIcon";
 
 class ItemPanel extends React.Component {
 	constructor(props) {
@@ -113,7 +113,7 @@ class ItemPanel extends React.Component {
 		return (
 			<div className="item-btn">
 				<button id="add-item" onClick={() => this.handleAddItemClick()}>
-                    <AddItemIcon/>
+					<AddItemIcon />
 					Add Item
 				</button>
 			</div>

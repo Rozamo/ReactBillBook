@@ -6,7 +6,7 @@ import CustomersForm from "./customers/CustomersForm";
 import ItemsTable from "./items/ItemsTable";
 import ItemsForm from "./items/ItemsForm";
 import Invoices from "./invoices/Invoices";
-import InvoiceForm from "./invoices/InvoiceForm";
+import InvoiceForm from "./invoices/invoiceForm/InvoiceForm";
 
 export default function App() {
 	const param = window.location.href;
