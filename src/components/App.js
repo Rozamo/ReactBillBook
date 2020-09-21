@@ -23,12 +23,10 @@ export default function App() {
       return '';
   }
 
-  useEffect(() => {
-      history.listen(location => {
-        if (location && location.pathname)
-          setSidebarChoice(getCurrentSidebarChoice(location.pathname));
-      });
-  }, []);
+  history.listen(location => {
+    if (location && location.pathname)
+      setSidebarChoice(getCurrentSidebarChoice(location.pathname));
+  });
   
   return (
       <div className="outside-box">
