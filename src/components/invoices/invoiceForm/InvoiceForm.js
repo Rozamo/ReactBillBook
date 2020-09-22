@@ -5,6 +5,7 @@ import loading from '../../../images/loading.gif';
 import Panel1 from './Panel1';
 import ItemPanel from './ItemPanel';
 import Panel2 from './Panel2';
+import PropTypes from 'prop-types';
 
 class InvoiceForm extends React.Component {
 	_isMounted = false;
@@ -14,7 +15,6 @@ class InvoiceForm extends React.Component {
 	  this.state = {
 	    error: null,
 	    isLoaded: true,
-	    items: [],
 	    totalAmount: 0,
 	    selectedItems: [],
 	    invoice: {
@@ -102,7 +102,6 @@ class InvoiceForm extends React.Component {
 	  this.setState({
 	    error: null,
 	    isLoaded: false,
-	    items: [],
 	  });
 	  fetch('https://rzp-training.herokuapp.com/team2/invoices', {
 	    method: 'POST',
@@ -143,7 +142,8 @@ class InvoiceForm extends React.Component {
     </div>
   </div>
 	    );
-	  } if (!isLoaded) {
+    } 
+    if (!isLoaded) {
 	    return (
   <div className="content">
     <div className="top-panel">

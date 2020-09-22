@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { any, PropTypes } from "prop-types";
 
 class Panel2 extends Component {
 	render() {
@@ -13,7 +14,7 @@ class Panel2 extends Component {
 							cols="30"
 							rows="10"
 							placeholder="Write the description here"
-						></textarea>
+						 />
 					</div>
 				</div>
 				<div className="item-total" id="inv-items-list">
@@ -33,7 +34,7 @@ class Panel2 extends Component {
 							))}
 						</tbody>
 					</table>
-					{itemList.length > 0 ? <hr></hr> : <span></span>}
+					{itemList.length > 0 ? <hr /> : <span />}
 					<div className="item-total-last-row">
 						<span>TOTAL AMOUNT:</span>
 						<span id="item-total-amount">
@@ -44,6 +45,12 @@ class Panel2 extends Component {
 			</div>
 		);
 	}
+}
+
+Panel2.propTypes={
+  itemList:PropTypes.arryof(any),
+  value:PropTypes.number,
+  changeNotes:PropTypes.func
 }
 
 export default Panel2;

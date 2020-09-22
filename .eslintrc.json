@@ -1,5 +1,5 @@
 {
-  "extends": ["kentcdodds"],
+  "extends": ["kentcdodds","kentcdodds/react"],
   "env": {
     "browser": true,
     "node": true,

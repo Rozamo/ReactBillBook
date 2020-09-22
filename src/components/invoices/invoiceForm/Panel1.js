@@ -1,4 +1,5 @@
 import React from 'react';
+import { PropTypes } from "prop-types";
 import CustomerSelect from './CustomerSelect';
 
 class Panel1 extends React.Component {
@@ -12,15 +13,21 @@ class Panel1 extends React.Component {
                 </div>
                 <div>
                     <label>Issued at</label>
-                    <input style={{width: "170px"}} onChange={(event)=>changeDate(event.target.value)} type="date" id="issued-at" name="issued-at"></input>
+                    <input style={{width: "170px"}} onChange={(event)=>changeDate(event.target.value)} type="date" id="issued-at" name="issued-at" />
                 </div>
                 <div>
                     <label>Due-Date</label>
-                    <input style={{width: "170px"}} onChange={(event)=>changeExpirebyDate(event.target.value)} type="date" id="due-date" name="due-date"></input>
+                    <input style={{width: "170px"}} onChange={(event)=>changeExpirebyDate(event.target.value)} type="date" id="due-date" name="due-date" />
                 </div>
             </div>
          );
     }
+}
+
+Panel1.propTypes={
+  changeCustomerDetails:PropTypes.func.isRequired,
+  changeDate:PropTypes.func.isRequired,
+  changeExpirebyDate:PropTypes.func.isRequired
 }
 
 export default Panel1;

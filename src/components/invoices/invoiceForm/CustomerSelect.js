@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { PropTypes } from "prop-types";
 
 class CustomerSelect extends Component {
 	constructor(props) {
@@ -35,10 +36,11 @@ class CustomerSelect extends Component {
 	};
 
 	handleChange(event, changeCustomerDetails) {
-		const idx = event.target.value;
+    const idx = event.target.value;
+    const {items}=this.state;
 		this.setState(
 			{
-				chosenCustomer: this.state.items[idx],
+				chosenCustomer: items[idx],
 				showDDL: false,
 			},
 			() => changeCustomerDetails(this.state.chosenCustomer)
@@ -92,6 +94,10 @@ class CustomerSelect extends Component {
 			</div>
 		);
 	}
+}
+
+CustomerSelect.propTypes={
+  changeCustomerDetails: PropTypes.func.isRequired
 }
 
 export default CustomerSelect;

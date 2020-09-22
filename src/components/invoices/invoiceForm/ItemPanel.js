@@ -1,12 +1,11 @@
 import React, { Component } from "react";
+import { PropTypes } from "prop-types";
 import AddItemIcon from "../icons/AddItemIcon";
 
 class ItemPanel extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			error: null,
-			isLoaded: false,
 			items: [],
 			selectedItems: [],
 			showDDL: false,
@@ -19,14 +18,7 @@ class ItemPanel extends Component {
 			.then(
 				(result) => {
 					this.setState({
-						isLoaded: true,
 						items: result.items,
-					});
-				},
-				(error) => {
-					this.setState({
-						isLoaded: true,
-						error,
 					});
 				}
 			);
@@ -36,10 +28,12 @@ class ItemPanel extends Component {
 		this.setState({ showDDL: true });
 	};
 	handleSelectChange = (event, changeAmount) => {
-		const selectedItems = this.state.selectedItems;
-			const idx = event.target.value;
-		const item = this.state.items[idx];
-		const tot = Number(this.state.tot + item.amount / 100);
+    const {selectedItems,items} = this.state;
+    let {tot}=this.state;
+		const idx = event.target.value;
+		const item = items[idx];
+    tot = Number(tot + item.amount / 100);
+    
 		selectedItems.push({ item, quantity: 1, id: idx });
 		this.setState(
 			{
@@ -51,13 +45,13 @@ class ItemPanel extends Component {
 		);
 	};
 	handleQuantityInputChange = (event, changeAmount) => {
-		const item = this.state.selectedItems[event.target.id];
-			let tot = this.state.tot;
+    const{selectedItems}=this.state;
+		const item = selectedItems[event.target.id];
+		let {tot} = this.state;
 		tot -= Number(
 			(item.item.amount / 100) * (item.quantity ? item.quantity : 0)
 		);
 		item.quantity = event.target.value;
-		const selectedItems = [...this.state.selectedItems];
 		tot += Number(
 			(item.item.amount / 100) * (item.quantity ? item.quantity : 0)
 		);
@@ -73,8 +67,8 @@ class ItemPanel extends Component {
 		);
 	};
 	handleDeleteClick = (event, changeAmount) => {
-		const selectedItems = this.state.selectedItems;
-			let tot = this.state.tot;
+		const {selectedItems} = this.state;
+			let {tot} = this.state;
 		tot -=
 			(selectedItems[event.target.id].item.amount / 100) *
 			selectedItems[event.target.id].quantity;
@@ -133,7 +127,7 @@ class ItemPanel extends Component {
 								<th>Amount</th>
 							</tr>
 						) : (
-							<tr></tr>
+							<tr />
 						)}
 						{this.state.selectedItems.map((item, index) => (
 							<tr key={index}>
@@ -151,7 +145,7 @@ class ItemPanel extends Component {
 												this.props.changeAmount
 											);
 										}}
-									></input>
+									 />
 								</td>
 								<td>{item.item.amount / 100}</td>
 								<td>
@@ -162,7 +156,7 @@ class ItemPanel extends Component {
 										onClick={(event) =>
 											this.handleDeleteClick(event, this.props.changeAmount)
 										}
-									></i>
+									 />
 								</td>
 							</tr>
 						))}
@@ -172,6 +166,10 @@ class ItemPanel extends Component {
 			</div>
 		);
 	}
+}
+
+ItemPanel.propTypes={
+  changeAmount:PropTypes.func.isRequired
 }
 
 export default ItemPanel;
