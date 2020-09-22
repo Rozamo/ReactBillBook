@@ -56,5 +56,5 @@ export default function CustomersTable(props) {
 }
 
 CustomersTable.propTypes = {
-  location: PropTypes.object.isRequired,
+  location: PropTypes.objectOf(PropTypes.any).isRequired,
 };
