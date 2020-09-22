@@ -3,3 +3,6 @@ node_modules
 .eslintrc.js
 .eslintrc.json
 package-lock.json
+.eslintrc.json
+.babelrc
+package-lock.json
