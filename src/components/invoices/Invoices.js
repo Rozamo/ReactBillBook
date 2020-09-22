@@ -1,10 +1,9 @@
 import React from "react";
-import Button from "./Button.js";
-import Table from "./Table.js";
 import { Link } from "react-router-dom";
+import Button from "./Button";
+import Table from "./Table";
 
-class Invoices extends React.Component {
-	render() {
+function Invoices(){
 		return (
 			<div className="content">
 				<div className="top-panel">
@@ -22,7 +21,6 @@ class Invoices extends React.Component {
 				<Table sidebarChoice="invoices" />
 			</div>
 		);
-	}
 }
 
 export default Invoices;

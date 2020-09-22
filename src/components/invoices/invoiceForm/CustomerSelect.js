@@ -35,7 +35,7 @@ class CustomerSelect extends Component {
 	};
 
 	handleChange(event, changeCustomerDetails) {
-		let idx = event.target.value;
+		const idx = event.target.value;
 		this.setState(
 			{
 				chosenCustomer: this.state.items[idx],
@@ -46,7 +46,6 @@ class CustomerSelect extends Component {
 	}
 
 	render() {
-		const { error } = this.state;
 		if (this.state.error) return "SOME ERROR OCCURED";
 
 		if (!this.state.chosenCustomer && !this.state.showDDL)
@@ -66,7 +65,7 @@ class CustomerSelect extends Component {
 						className="customer_ddl"
 						id="cust_list"
 						defaultValue="Choose Customer"
-						onChange={() =>
+						onChange={(event) =>
 							this.handleChange(event, this.props.changeCustomerDetails)
 						}
 					>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import AddItemIcon from "../icons/AddItemIcon";
 
-class ItemPanel extends React.Component {
+class ItemPanel extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -36,36 +36,36 @@ class ItemPanel extends React.Component {
 		this.setState({ showDDL: true });
 	};
 	handleSelectChange = (event, changeAmount) => {
-		let selectedItems = this.state.selectedItems,
-			idx = event.target.value;
-		let item = this.state.items[idx];
-		let tot = Number(this.state.tot + item.amount / 100);
-		selectedItems.push({ item: item, quantity: 1, id: idx });
+		const selectedItems = this.state.selectedItems;
+			const idx = event.target.value;
+		const item = this.state.items[idx];
+		const tot = Number(this.state.tot + item.amount / 100);
+		selectedItems.push({ item, quantity: 1, id: idx });
 		this.setState(
 			{
 				showDDL: false,
-				selectedItems: selectedItems,
-				tot: tot,
+				selectedItems,
+				tot,
 			},
 			() => changeAmount(this.state.tot, this.state.selectedItems)
 		);
 	};
 	handleQuantityInputChange = (event, changeAmount) => {
-		let item = this.state.selectedItems[event.target.id],
-			tot = this.state.tot;
+		const item = this.state.selectedItems[event.target.id];
+			let tot = this.state.tot;
 		tot -= Number(
-			(item["item"].amount / 100) * (item["quantity"] ? item["quantity"] : 0)
+			(item.item.amount / 100) * (item.quantity ? item.quantity : 0)
 		);
-		item["quantity"] = event.target.value;
-		let selectedItems = [...this.state.selectedItems];
+		item.quantity = event.target.value;
+		const selectedItems = [...this.state.selectedItems];
 		tot += Number(
-			(item["item"].amount / 100) * (item["quantity"] ? item["quantity"] : 0)
+			(item.item.amount / 100) * (item.quantity ? item.quantity : 0)
 		);
 		selectedItems[event.target.id] = item;
 		this.setState(
 			{
-				selectedItems: selectedItems,
-				tot: tot,
+				selectedItems,
+				tot,
 			},
 			() => {
 				changeAmount(this.state.tot, this.state.selectedItems);
@@ -73,13 +73,13 @@ class ItemPanel extends React.Component {
 		);
 	};
 	handleDeleteClick = (event, changeAmount) => {
-		let selectedItems = this.state.selectedItems,
-			tot = this.state.tot;
+		const selectedItems = this.state.selectedItems;
+			let tot = this.state.tot;
 		tot -=
-			(selectedItems[event.target.id]["item"].amount / 100) *
-			selectedItems[event.target.id]["quantity"];
+			(selectedItems[event.target.id].item.amount / 100) *
+			selectedItems[event.target.id].quantity;
 		selectedItems.splice(event.target.id, 1);
-		this.setState({ selectedItems: selectedItems, tot: tot }, () => {
+		this.setState({ selectedItems, tot }, () => {
 			changeAmount(this.state.tot, this.state.selectedItems);
 		});
 	};
@@ -89,21 +89,22 @@ class ItemPanel extends React.Component {
 				<select
 					className="item_ddl"
 					defaultValue="Select Items"
-					onChange={() => {
+					onChange={(event) => {
 						this.handleSelectChange(event, this.props.changeAmount);
 					}}
 				>
 					<option value="Select Items">Select Items</option>
 					{this.state.items.map((item, index) => {
 						if (
-							this.state.selectedItems.findIndex((e) => e["item"] === item) ===
+							this.state.selectedItems.findIndex((e) => e.item === item) ===
 							-1
 						)
 							return (
 								<option key={index} value={index}>
 									{item.name}
 								</option>
-							);
+              );
+              else return <></>
 					})}
 				</select>
 			</div>
@@ -136,7 +137,7 @@ class ItemPanel extends React.Component {
 						)}
 						{this.state.selectedItems.map((item, index) => (
 							<tr key={index}>
-								<td>{item["item"].name}</td>
+								<td>{item.item.name}</td>
 								<td>
 									<input
 										id={index}
@@ -144,7 +145,7 @@ class ItemPanel extends React.Component {
 										type="text"
 										defaultValue="1"
 										value={item.quantity}
-										onChange={() => {
+										onChange={(event) => {
 											this.handleQuantityInputChange(
 												event,
 												this.props.changeAmount
@@ -152,13 +153,13 @@ class ItemPanel extends React.Component {
 										}}
 									></input>
 								</td>
-								<td>{item["item"].amount / 100}</td>
+								<td>{item.item.amount / 100}</td>
 								<td>
-									{(item["item"].amount * item["quantity"]) / 100}
+									{(item.item.amount * item.quantity) / 100}
 									<i
 										id={index}
 										className="fa fa-trash"
-										onClick={() =>
+										onClick={(event) =>
 											this.handleDeleteClick(event, this.props.changeAmount)
 										}
 									></i>
