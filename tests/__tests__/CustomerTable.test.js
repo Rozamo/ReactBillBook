@@ -4,6 +4,8 @@ import { act } from "react-dom/test-utils";
 import CustomersTable from "../../src/components/customers/CustomersTable";
 import { BrowserRouter as Router } from "react-router-dom";
 
+jest.useFakeTimers();
+
 let container = null;
 beforeEach(() => {
   // setup a DOM element as a render target
@@ -34,7 +36,8 @@ describe("CustomersTable test", () => {
     };
     global.fetch = jest.fn().mockImplementation(() =>
       Promise.resolve({
-        json: () => Promise.resolve(fakeData),
+        json: () =>
+          new Promise((resolve) => setTimeout(() => resolve(fakeData), 1000)),
       })
     );
 
@@ -48,7 +51,16 @@ describe("CustomersTable test", () => {
     });
     expect(container.textContent).toContain("Customers");
     expect(container.innerHTML).toMatchInlineSnapshot(
-      `"<div class=\\"content\\"><div class=\\"top-panel\\"><h1 id=\\"title\\">Customers</h1><a href=\\"/customers/create\\"><button type=\\"button\\" id=\\"button\\" value=\\"\\"><img src=\\"test-file-stub\\" id=\\"floppy\\" alt=\\"New\\">New Customer</button></a></div><table class=\\"inv-table\\" id=\\"inv-table\\"><thead><tr><th>NAME</th><th>PHONE</th><th>EMAIL</th><th>CREATED ON</th></tr></thead><tbody><tr><td class=\\"newTD firstTD\\">Jmp</td><td class=\\"newTD middleTD\\"></td><td class=\\"newTD middleTD\\">J@rzp.com</td><td class=\\"newTD lastTD\\">NaN Invalid Date NaN</td></tr></tbody></table></div>"`
+      `"<div class=\\"content\\"><div class=\\"top-panel\\"><h1 id=\\"title\\">Customers</h1><a href=\\"/customers/create\\"><button type=\\"button\\" id=\\"button\\" value=\\"\\"><img src=\\"test-file-stub\\" id=\\"floppy\\" alt=\\"New\\">New Customer</button></a></div><img src=\\"test-file-stub\\" alt=\\"Loading....\\" id=\\"load-img\\"></div>"`
+    );
+    jest.runOnlyPendingTimers();
+
+    act(() => {
+      jest.advanceTimersByTime(4000);
+    });
+
+    expect(container.innerHTML).toMatchInlineSnapshot(
+      `"<div class=\\"content\\"><div class=\\"top-panel\\"><h1 id=\\"title\\">Customers</h1><a href=\\"/customers/create\\"><button type=\\"button\\" id=\\"button\\" value=\\"\\"><img src=\\"test-file-stub\\" id=\\"floppy\\" alt=\\"New\\">New Customer</button></a></div><img src=\\"test-file-stub\\" alt=\\"Loading....\\" id=\\"load-img\\"></div>"`
     );
 
     const newCustBtn = document.querySelector("button");
