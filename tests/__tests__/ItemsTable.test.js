@@ -1,80 +1,76 @@
 import React from "react";
-import { render, unmountComponentAtNode } from "react-dom";
-import { act } from "react-dom/test-utils";
-import ItemsTable from "../../src/components/items/ItemsTable";
 import { BrowserRouter as Router } from "react-router-dom";
+import { render, fireEvent, screen, waitFor } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
 
-jest.useFakeTimers();
+import ItemsTable from "../../src/components/items/ItemsTable";
 
-let container = null;
-beforeEach(() => {
-  // setup a DOM element as a render target
-  container = document.createElement("div");
-  document.body.appendChild(container);
+const fakeData = {
+  entity: "collection",
+  items: [
+    {
+      name: "Jmp",
+      email: "J@rzp.com",
+      age: "32",
+      address: "123, Charming Avenue",
+      amount: 1231,
+    },
+  ],
+};
+
+test("renders ItemsTable", async () => {
+  global.fetch = jest.fn().mockImplementation(() =>
+    Promise.resolve({
+      json: () => new Promise((resolve) => resolve(fakeData)),
+    })
+  );
+
+  const { container } = render(
+    <Router>
+      <ItemsTable location={{ state: { submitSuccess: true } }} />
+    </Router>
+  );
+
+  expect(container.querySelector("#load-img").getAttribute("alt")).toBe(
+    "Loading...."
+  );
+
+  expect(container.querySelector(".content")).toMatchSnapshot();
+
+  await waitFor(() => screen);
+
+  expect(container.querySelector(".content")).toMatchSnapshot();
+
+  expect(fetch).toHaveBeenCalledTimes(1);
+  expect(container.querySelector("tbody").textContent).toContain("Jmp");
+
+  global.fetch.mockClear();
+  delete global.fetch;
 });
 
-afterEach(() => {
-  // cleanup on exiting
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-});
+test("handles error ItemsTable", async () => {
+  global.fetch = jest.fn().mockImplementation(() =>
+    Promise.resolve({
+      ok: false,
+      json: () => new Promise((resolve) => resolve({ status: 500 })),
+    })
+  );
 
-describe("ItemsTable test", () => {
-  it("should render items table", async () => {
-    const fakeData = {
-      entity: "collection",
-      items: [
-        {
-          name: "Jmp",
-          email: "J@rzp.com",
-          age: "32",
-          address: "123, Charming Avenue",
-          amount: 1231,
-        },
-      ],
-    };
-    global.fetch = jest.fn().mockImplementation(() =>
-      Promise.resolve({
-        json: () =>
-          new Promise((resolve) => setTimeout(() => resolve(fakeData), 1000)),
-      })
-    );
+  const { container } = render(
+    <Router>
+      <ItemsTable location={{ state: { submitSuccess: true } }} />
+    </Router>
+  );
+  expect(container.querySelector("#load-img").getAttribute("alt")).toBe(
+    "Loading...."
+  );
 
-    await act(async () => {
-      render(
-        <Router>
-          <ItemsTable location={{ state: { submitSuccess: true } }} />
-        </Router>,
-        container
-      );
-    });
-    expect(container.textContent).toContain("Items");
-    expect(container.innerHTML).toMatchInlineSnapshot(
-      `"<div class=\\"content\\"><div class=\\"top-panel\\"><h1 id=\\"title\\">Items</h1><a href=\\"/items/create\\"><button type=\\"button\\" id=\\"button\\" value=\\"\\"><img src=\\"test-file-stub\\" id=\\"floppy\\" alt=\\"New\\">Add Item</button></a></div><img src=\\"test-file-stub\\" alt=\\"Loading....\\" id=\\"load-img\\"></div>"`
-    );
-    jest.runOnlyPendingTimers();
+  expect(container).toMatchSnapshot();
 
-    act(() => {
-      jest.advanceTimersByTime(4000);
-    });
+  await waitFor(() => screen);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(
-      `"<div class=\\"content\\"><div class=\\"top-panel\\"><h1 id=\\"title\\">Items</h1><a href=\\"/items/create\\"><button type=\\"button\\" id=\\"button\\" value=\\"\\"><img src=\\"test-file-stub\\" id=\\"floppy\\" alt=\\"New\\">Add Item</button></a></div><img src=\\"test-file-stub\\" alt=\\"Loading....\\" id=\\"load-img\\"></div>"`
-    );
+  expect(container.querySelector(".content")).toMatchSnapshot();
 
-    const newCustBtn = document.querySelector("button");
-    expect(newCustBtn.textContent).toContain("Add Item");
-
-    act(() => {
-      newCustBtn.dispatchEvent(new MouseEvent("click", { bubbles: true }));
-    });
-
-    expect(container.innerHTML).toMatchInlineSnapshot(
-      `"<div class=\\"content\\"><div class=\\"top-panel\\"><h1 id=\\"title\\">Items</h1><a href=\\"/items/create\\"><button type=\\"button\\" id=\\"button\\" value=\\"\\"><img src=\\"test-file-stub\\" id=\\"floppy\\" alt=\\"New\\">Add Item</button></a></div><img src=\\"test-file-stub\\" alt=\\"Loading....\\" id=\\"load-img\\"></div>"`
-    );
-
-    global.fetch.mockClear();
-    delete global.fetch;
-  });
+  global.fetch.mockClear();
+  delete global.fetch;
 });

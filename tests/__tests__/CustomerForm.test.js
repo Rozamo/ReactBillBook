@@ -1,51 +1,44 @@
 import React from "react";
-import { render, unmountComponentAtNode } from "react-dom";
-import { act } from "react-dom/test-utils";
 import CustomerForm from "../../src/components/customers/CustomersForm";
-
-let container = null;
-beforeEach(() => {
-  // setup a DOM element as a render target
-  container = document.createElement("div");
-  document.body.appendChild(container);
-});
-
-afterEach(() => {
-  // cleanup on exiting
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-});
+import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 
 describe("Customer form", () => {
-  it("should render form", () => {
-    act(() => {
-      render(<CustomerForm />, container);
-    });
-    expect(container.innerHTML).toMatchInlineSnapshot(
-      `"<div class=\\"content\\"><div class=\\"top-panel\\"><h1 id=\\"title\\">New Customer</h1></div><form class=\\"customer-form\\"><div class=\\"cust-panel-1\\"><div><label for=\\"name\\">Name</label><input type=\\"text\\" name=\\"name\\" required=\\"\\" value=\\"\\"></div><div><label for=\\"contact\\">Phone</label><input type=\\"text\\" name=\\"contact\\" value=\\"\\"></div></div><label for=\\"email\\">Email</label><div class=\\"cust-panel-1\\"><input type=\\"email\\" name=\\"email\\" value=\\"\\"><button type=\\"submit\\" id=\\"button\\" value=\\"\\"><img src=\\"test-file-stub\\" id=\\"floppy\\" alt=\\"Save\\">Save Customer</button></div></form></div>"`
-    );
-    const addCustBtn = document.querySelector("button");
-    expect(addCustBtn.textContent).toContain("Save Customer");
-    act(() => {
-      addCustBtn.dispatchEvent(new MouseEvent("click", { bubbles: true }));
-    });
+  it("should render CustomerForm", async () => {
+    const { container } = render(<CustomerForm />);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(
-      `"<div class=\\"content\\"><div class=\\"top-panel\\"><h1 id=\\"title\\">New Customer</h1></div><form class=\\"customer-form\\"><div class=\\"cust-panel-1\\"><div><label for=\\"name\\">Name</label><input type=\\"text\\" name=\\"name\\" required=\\"\\" value=\\"\\"></div><div><label for=\\"contact\\">Phone</label><input type=\\"text\\" name=\\"contact\\" value=\\"\\"></div></div><label for=\\"email\\">Email</label><div class=\\"cust-panel-1\\"><input type=\\"email\\" name=\\"email\\" value=\\"\\"><button type=\\"submit\\" id=\\"button\\" value=\\"\\"><img src=\\"test-file-stub\\" id=\\"floppy\\" alt=\\"Save\\">Save Customer</button></div></form></div>"`
+    expect(container).toMatchSnapshot();
+    expect(container.querySelector("#load-img")).toBe(null);
+
+    expect(container.querySelector(".customer-form").textContent).toContain(
+      "Name"
     );
 
-    const name = document.querySelectorAll("input")[0];
-    const contact = document.querySelectorAll("input");
-
-    name.value = "Anm";
-    contact.value = 23;
-
-    expect(name.value.length).toBe(3);
-    expect(contact.value).toBe(23);
-
-    expect(container.innerHTML).toMatchInlineSnapshot(
-      `"<div class=\\"content\\"><div class=\\"top-panel\\"><h1 id=\\"title\\">New Customer</h1></div><form class=\\"customer-form\\"><div class=\\"cust-panel-1\\"><div><label for=\\"name\\">Name</label><input type=\\"text\\" name=\\"name\\" required=\\"\\" value=\\"\\"></div><div><label for=\\"contact\\">Phone</label><input type=\\"text\\" name=\\"contact\\" value=\\"\\"></div></div><label for=\\"email\\">Email</label><div class=\\"cust-panel-1\\"><input type=\\"email\\" name=\\"email\\" value=\\"\\"><button type=\\"submit\\" id=\\"button\\" value=\\"\\"><img src=\\"test-file-stub\\" id=\\"floppy\\" alt=\\"Save\\">Save Customer</button></div></form></div>"`
+    expect(container.querySelector(".customer-form").textContent).toContain(
+      "Email"
     );
+
+    const inputs = container.querySelectorAll("input");
+    fireEvent.change(inputs[0], { target: { value: "Anm" } });
+    expect(inputs[0].value).toBe("Anm");
+
+    fireEvent.change(inputs[1], { target: { value: 8237482734 } });
+    expect(inputs[1].value).toBe("8237482734");
+
+    fireEvent.change(inputs[2], { target: { value: "A@gmail.com" } });
+    expect(inputs[2].value).toBe("A@gmail.com");
+
+    expect(container).toMatchSnapshot();
+
+    fireEvent.click(container.querySelector("button"));
+
+    expect(container).toMatchSnapshot();
+    expect(container.querySelector("#load-img").getAttribute("alt")).toContain(
+      "Loading...."
+    );
+
+    await waitFor(() => container);
+
+    expect(container.querySelector("#load-img")).toBe(null);
+    expect(container).toMatchSnapshot();
   });
 });

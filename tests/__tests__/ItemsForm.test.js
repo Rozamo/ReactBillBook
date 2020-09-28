@@ -1,39 +1,43 @@
 import React from "react";
-import { render, unmountComponentAtNode } from "react-dom";
-import { act } from "react-dom/test-utils";
 import ItemsForm from "../../src/components/items/ItemsForm";
+import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 
-let container = null;
-beforeEach(() => {
-  // setup a DOM element as a render target
-  container = document.createElement("div");
-  document.body.appendChild(container);
-});
+describe("Items form", () => {
+  it("should render ItemsForm", async () => {
+    const { container } = render(<ItemsForm />);
 
-afterEach(() => {
-  // cleanup on exiting
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-});
+    expect(container).toMatchSnapshot();
+    expect(container.querySelector("#load-img")).toBe(null);
 
-describe("Customer form", () => {
-  it("should render form", () => {
-    act(() => {
-      render(<ItemsForm />, container);
-    });
-    expect(container.innerHTML).toMatchInlineSnapshot(
-      `"<div class=\\"content\\"><div class=\\"top-panel\\"><h1 id=\\"title\\">New Item</h1></div><form class=\\"customer-form\\" style=\\"width: 50%;\\"><label for=\\"name\\">Name</label><input type=\\"text\\" name=\\"name\\" value=\\"\\"><label for=\\"amount\\">Price</label><input type=\\"number\\" name=\\"amount\\" value=\\"\\"><label for=\\"name\\">Description</label><textarea type=\\"text\\" name=\\"description\\"></textarea><br><button type=\\"submit\\" id=\\"button\\" value=\\"\\"><img src=\\"test-file-stub\\" id=\\"floppy\\" alt=\\"Save\\">Save Item</button></form></div>"`
+    expect(container.querySelector(".content").textContent).toContain("Name");
+
+    expect(container.querySelector(".content").textContent).toContain(
+      "Description"
     );
 
-    expect(container.textContent).toContain("Name");
-    const name = document.querySelectorAll("input")[0];
-    const desc = document.getElementsByName("description")[0];
+    const inputs = container.querySelectorAll("input");
+    fireEvent.change(inputs[0], { target: { value: "React" } });
+    expect(inputs[0].value).toBe("React");
 
-    name.value = "Mouse";
-    desc.value = "desc";
+    fireEvent.change(inputs[1], { target: { value: 20000 } });
+    expect(inputs[1].value).toBe("20000");
 
-    expect(name.value.length).toBe(5);
-    expect(desc.value).toBe("desc");
+    fireEvent.change(container.querySelector("textarea"), {
+      target: { value: "desc" },
+    });
+
+    expect(container).toMatchSnapshot();
+
+    fireEvent.click(container.querySelector("button"));
+
+    expect(container).toMatchSnapshot();
+    expect(container.querySelector("#load-img").getAttribute("alt")).toContain(
+      "Loading...."
+    );
+
+    await waitFor(() => container);
+
+    expect(container.querySelector("#load-img")).toBe(null);
+    expect(container).toMatchSnapshot();
   });
 });

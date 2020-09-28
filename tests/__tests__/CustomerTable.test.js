@@ -51,8 +51,6 @@ test("renders CustomersTable", async () => {
     </Router>
   );
 
-  console.log(container);
-
   expect(container.querySelector("#load-img").getAttribute("alt")).toBe(
     "Loading...."
   );
