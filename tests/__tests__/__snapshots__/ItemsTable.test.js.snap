@@ -1,0 +1,187 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`handles error ItemsTable 1`] = `
+<div>
+  <div
+    class="content"
+  >
+    <div
+      class="top-panel"
+    >
+      <h1
+        id="title"
+      >
+        Items
+      </h1>
+      <a
+        href="/items/create"
+      >
+        <button
+          id="button"
+          type="button"
+          value=""
+        >
+          <img
+            alt="New"
+            id="floppy"
+            src="test-file-stub"
+          />
+          Add Item
+        </button>
+      </a>
+    </div>
+    <img
+      alt="Loading...."
+      id="load-img"
+      src="test-file-stub"
+    />
+  </div>
+</div>
+`;
+
+exports[`handles error ItemsTable 2`] = `
+<div
+  class="content"
+>
+  <div
+    class="top-panel"
+  >
+    <h1
+      id="title"
+    >
+      Items
+    </h1>
+    <a
+      href="/items/create"
+    >
+      <button
+        id="button"
+        type="button"
+        value=""
+      >
+        <img
+          alt="New"
+          id="floppy"
+          src="test-file-stub"
+        />
+        Add Item
+      </button>
+    </a>
+  </div>
+  <div>
+    Error:
+  </div>
+</div>
+`;
+
+exports[`renders ItemsTable 1`] = `
+<div
+  class="content"
+>
+  <div
+    class="top-panel"
+  >
+    <h1
+      id="title"
+    >
+      Items
+    </h1>
+    <a
+      href="/items/create"
+    >
+      <button
+        id="button"
+        type="button"
+        value=""
+      >
+        <img
+          alt="New"
+          id="floppy"
+          src="test-file-stub"
+        />
+        Add Item
+      </button>
+    </a>
+  </div>
+  <img
+    alt="Loading...."
+    id="load-img"
+    src="test-file-stub"
+  />
+</div>
+`;
+
+exports[`renders ItemsTable 2`] = `
+<div
+  class="content"
+>
+  <div
+    class="top-panel"
+  >
+    <h1
+      id="title"
+    >
+      Items
+    </h1>
+    <a
+      href="/items/create"
+    >
+      <button
+        id="button"
+        type="button"
+        value=""
+      >
+        <img
+          alt="New"
+          id="floppy"
+          src="test-file-stub"
+        />
+        Add Item
+      </button>
+    </a>
+  </div>
+  <table
+    class="inv-table"
+    id="inv-table"
+  >
+    <thead>
+      <tr>
+        <th>
+          NAME
+        </th>
+        <th>
+          DESCRIPTION
+        </th>
+        <th>
+          PRICE
+        </th>
+        <th>
+          ADDED ON
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td
+          class="newTD firstTD"
+        >
+          Jmp
+        </td>
+        <td
+          class="newTD middleTD"
+        />
+        <td
+          class="newTD middleTD"
+        >
+          ₹12.31
+        </td>
+        <td
+          class="newTD lastTD"
+        >
+          NaN Invalid Date NaN
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

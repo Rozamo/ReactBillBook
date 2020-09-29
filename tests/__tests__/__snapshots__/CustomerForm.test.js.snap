@@ -1,0 +1,255 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Customer form should render CustomerForm 1`] = `
+<div>
+  <div
+    class="content"
+  >
+    <div
+      class="top-panel"
+    >
+      <h1
+        id="title"
+      >
+        New Customer
+      </h1>
+    </div>
+    <form
+      class="customer-form"
+    >
+      <div
+        class="cust-panel-1"
+      >
+        <div>
+          <label
+            for="name"
+          >
+            Name
+          </label>
+          <input
+            name="name"
+            required=""
+            type="text"
+            value=""
+          />
+        </div>
+        <div>
+          <label
+            for="contact"
+          >
+            Phone
+          </label>
+          <input
+            name="contact"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <label
+        for="email"
+      >
+        Email
+      </label>
+      <div
+        class="cust-panel-1"
+      >
+        <input
+          name="email"
+          type="email"
+          value=""
+        />
+        <button
+          id="button"
+          type="submit"
+          value=""
+        >
+          <img
+            alt="Save"
+            id="floppy"
+            src="test-file-stub"
+          />
+          Save Customer
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`Customer form should render CustomerForm 2`] = `
+<div>
+  <div
+    class="content"
+  >
+    <div
+      class="top-panel"
+    >
+      <h1
+        id="title"
+      >
+        New Customer
+      </h1>
+    </div>
+    <form
+      class="customer-form"
+    >
+      <div
+        class="cust-panel-1"
+      >
+        <div>
+          <label
+            for="name"
+          >
+            Name
+          </label>
+          <input
+            name="name"
+            required=""
+            type="text"
+            value="Anm"
+          />
+        </div>
+        <div>
+          <label
+            for="contact"
+          >
+            Phone
+          </label>
+          <input
+            name="contact"
+            type="text"
+            value="8237482734"
+          />
+        </div>
+      </div>
+      <label
+        for="email"
+      >
+        Email
+      </label>
+      <div
+        class="cust-panel-1"
+      >
+        <input
+          name="email"
+          type="email"
+          value="A@gmail.com"
+        />
+        <button
+          id="button"
+          type="submit"
+          value=""
+        >
+          <img
+            alt="Save"
+            id="floppy"
+            src="test-file-stub"
+          />
+          Save Customer
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`Customer form should render CustomerForm 3`] = `
+<div>
+  <div
+    class="content"
+  >
+    <div
+      class="top-panel"
+    >
+      <h1
+        id="title"
+      >
+        New Customer
+      </h1>
+    </div>
+    <img
+      alt="Loading...."
+      id="load-img"
+      src="test-file-stub"
+    />
+  </div>
+</div>
+`;
+
+exports[`Customer form should render CustomerForm 4`] = `
+<div>
+  <div
+    class="content"
+  >
+    <div
+      class="top-panel"
+    >
+      <h1
+        id="title"
+      >
+        New Customer
+      </h1>
+    </div>
+    <form
+      class="customer-form"
+    >
+      <div
+        class="cust-panel-1"
+      >
+        <div>
+          <label
+            for="name"
+          >
+            Name
+          </label>
+          <input
+            name="name"
+            required=""
+            type="text"
+            value="Anm"
+          />
+        </div>
+        <div>
+          <label
+            for="contact"
+          >
+            Phone
+          </label>
+          <input
+            name="contact"
+            type="text"
+            value="8237482734"
+          />
+        </div>
+      </div>
+      <label
+        for="email"
+      >
+        Email
+      </label>
+      <div
+        class="cust-panel-1"
+      >
+        <input
+          name="email"
+          type="email"
+          value="A@gmail.com"
+        />
+        <button
+          id="button"
+          type="submit"
+          value=""
+        >
+          <img
+            alt="Save"
+            id="floppy"
+            src="test-file-stub"
+          />
+          Save Customer
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+`;

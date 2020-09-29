@@ -1,0 +1,187 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`handles error CustomersTable 1`] = `
+<div>
+  <div
+    class="content"
+  >
+    <div
+      class="top-panel"
+    >
+      <h1
+        id="title"
+      >
+        Customers
+      </h1>
+      <a
+        href="/customers/create"
+      >
+        <button
+          id="button"
+          type="button"
+          value=""
+        >
+          <img
+            alt="New"
+            id="floppy"
+            src="test-file-stub"
+          />
+          New Customer
+        </button>
+      </a>
+    </div>
+    <img
+      alt="Loading...."
+      id="load-img"
+      src="test-file-stub"
+    />
+  </div>
+</div>
+`;
+
+exports[`handles error CustomersTable 2`] = `
+<div
+  class="content"
+>
+  <div
+    class="top-panel"
+  >
+    <h1
+      id="title"
+    >
+      Customers
+    </h1>
+    <a
+      href="/customers/create"
+    >
+      <button
+        id="button"
+        type="button"
+        value=""
+      >
+        <img
+          alt="New"
+          id="floppy"
+          src="test-file-stub"
+        />
+        New Customer
+      </button>
+    </a>
+  </div>
+  <div>
+    Error:
+  </div>
+</div>
+`;
+
+exports[`renders CustomersTable 1`] = `
+<div
+  class="content"
+>
+  <div
+    class="top-panel"
+  >
+    <h1
+      id="title"
+    >
+      Customers
+    </h1>
+    <a
+      href="/customers/create"
+    >
+      <button
+        id="button"
+        type="button"
+        value=""
+      >
+        <img
+          alt="New"
+          id="floppy"
+          src="test-file-stub"
+        />
+        New Customer
+      </button>
+    </a>
+  </div>
+  <img
+    alt="Loading...."
+    id="load-img"
+    src="test-file-stub"
+  />
+</div>
+`;
+
+exports[`renders CustomersTable 2`] = `
+<div
+  class="content"
+>
+  <div
+    class="top-panel"
+  >
+    <h1
+      id="title"
+    >
+      Customers
+    </h1>
+    <a
+      href="/customers/create"
+    >
+      <button
+        id="button"
+        type="button"
+        value=""
+      >
+        <img
+          alt="New"
+          id="floppy"
+          src="test-file-stub"
+        />
+        New Customer
+      </button>
+    </a>
+  </div>
+  <table
+    class="inv-table"
+    id="inv-table"
+  >
+    <thead>
+      <tr>
+        <th>
+          NAME
+        </th>
+        <th>
+          PHONE
+        </th>
+        <th>
+          EMAIL
+        </th>
+        <th>
+          CREATED ON
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td
+          class="newTD firstTD"
+        >
+          Jmp
+        </td>
+        <td
+          class="newTD middleTD"
+        />
+        <td
+          class="newTD middleTD"
+        >
+          J@rzp.com
+        </td>
+        <td
+          class="newTD lastTD"
+        >
+          NaN Invalid Date NaN
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

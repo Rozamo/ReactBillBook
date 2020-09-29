@@ -1,0 +1,177 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`handles error Invoices list 1`] = `
+<div>
+  <div
+    class="content"
+  >
+    <div
+      class="top-panel"
+    >
+      <h1>
+        Invoices
+      </h1>
+      <a
+        href="/invoices/create"
+      >
+        <button
+          id="button"
+          value="create-invoice"
+        >
+          <img
+            alt="Save"
+            id="floppy"
+            src="test-file-stub"
+          />
+          New Invoice
+        </button>
+      </a>
+    </div>
+    <img
+      alt="Loading...."
+      id="load-img"
+      src="test-file-stub"
+    />
+  </div>
+</div>
+`;
+
+exports[`handles error Invoices list 2`] = `
+<div
+  class="content"
+>
+  <div
+    class="top-panel"
+  >
+    <h1>
+      Invoices
+    </h1>
+    <a
+      href="/invoices/create"
+    >
+      <button
+        id="button"
+        value="create-invoice"
+      >
+        <img
+          alt="Save"
+          id="floppy"
+          src="test-file-stub"
+        />
+        New Invoice
+      </button>
+    </a>
+  </div>
+  <div>
+    Error: 
+  </div>
+</div>
+`;
+
+exports[`renders Invoices list 1`] = `
+<div
+  class="content"
+>
+  <div
+    class="top-panel"
+  >
+    <h1>
+      Invoices
+    </h1>
+    <a
+      href="/invoices/create"
+    >
+      <button
+        id="button"
+        value="create-invoice"
+      >
+        <img
+          alt="Save"
+          id="floppy"
+          src="test-file-stub"
+        />
+        New Invoice
+      </button>
+    </a>
+  </div>
+  <img
+    alt="Loading...."
+    id="load-img"
+    src="test-file-stub"
+  />
+</div>
+`;
+
+exports[`renders Invoices list 2`] = `
+<div
+  class="content"
+>
+  <div
+    class="top-panel"
+  >
+    <h1>
+      Invoices
+    </h1>
+    <a
+      href="/invoices/create"
+    >
+      <button
+        id="button"
+        value="create-invoice"
+      >
+        <img
+          alt="Save"
+          id="floppy"
+          src="test-file-stub"
+        />
+        New Invoice
+      </button>
+    </a>
+  </div>
+  <table
+    class="inv-table"
+    id="inv-table"
+  >
+    <tbody>
+      <tr>
+        <th>
+          DATE
+        </th>
+        <th>
+          CUSTOMER
+        </th>
+        <th>
+          PAID STATUS
+        </th>
+        <th>
+          AMOUNT
+        </th>
+        <th>
+          AMOUNT DUE
+        </th>
+      </tr>
+      <tr>
+        <td>
+          11 Sep 2020
+        </td>
+        <td>
+          Jmp
+        </td>
+        <td>
+          <mark>
+             
+            draft
+             
+          </mark>
+        </td>
+        <td>
+          ₹500.00
+        </td>
+        <td>
+          0
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

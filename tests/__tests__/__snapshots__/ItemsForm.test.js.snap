@@ -1,0 +1,223 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Items form should render ItemsForm 1`] = `
+<div>
+  <div
+    class="content"
+  >
+    <div
+      class="top-panel"
+    >
+      <h1
+        id="title"
+      >
+        New Item
+      </h1>
+    </div>
+    <form
+      class="customer-form"
+      style="width: 50%;"
+    >
+      <label
+        for="name"
+      >
+        Name
+      </label>
+      <input
+        name="name"
+        type="text"
+        value=""
+      />
+      <label
+        for="amount"
+      >
+        Price
+      </label>
+      <input
+        name="amount"
+        type="number"
+        value=""
+      />
+      <label
+        for="name"
+      >
+        Description
+      </label>
+      <textarea
+        name="description"
+        type="text"
+      />
+      <br />
+      <button
+        id="button"
+        type="submit"
+        value=""
+      >
+        <img
+          alt="Save"
+          id="floppy"
+          src="test-file-stub"
+        />
+        Save Item
+      </button>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`Items form should render ItemsForm 2`] = `
+<div>
+  <div
+    class="content"
+  >
+    <div
+      class="top-panel"
+    >
+      <h1
+        id="title"
+      >
+        New Item
+      </h1>
+    </div>
+    <form
+      class="customer-form"
+      style="width: 50%;"
+    >
+      <label
+        for="name"
+      >
+        Name
+      </label>
+      <input
+        name="name"
+        type="text"
+        value="React"
+      />
+      <label
+        for="amount"
+      >
+        Price
+      </label>
+      <input
+        name="amount"
+        type="number"
+        value="20000"
+      />
+      <label
+        for="name"
+      >
+        Description
+      </label>
+      <textarea
+        name="description"
+        type="text"
+      >
+        desc
+      </textarea>
+      <br />
+      <button
+        id="button"
+        type="submit"
+        value=""
+      >
+        <img
+          alt="Save"
+          id="floppy"
+          src="test-file-stub"
+        />
+        Save Item
+      </button>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`Items form should render ItemsForm 3`] = `
+<div>
+  <div
+    class="content"
+  >
+    <div
+      class="top-panel"
+    >
+      <h1
+        id="title"
+      >
+        New Item
+      </h1>
+    </div>
+    <img
+      alt="Loading...."
+      id="load-img"
+      src="test-file-stub"
+    />
+  </div>
+</div>
+`;
+
+exports[`Items form should render ItemsForm 4`] = `
+<div>
+  <div
+    class="content"
+  >
+    <div
+      class="top-panel"
+    >
+      <h1
+        id="title"
+      >
+        New Item
+      </h1>
+    </div>
+    <form
+      class="customer-form"
+      style="width: 50%;"
+    >
+      <label
+        for="name"
+      >
+        Name
+      </label>
+      <input
+        name="name"
+        type="text"
+        value="React"
+      />
+      <label
+        for="amount"
+      >
+        Price
+      </label>
+      <input
+        name="amount"
+        type="number"
+        value="20000"
+      />
+      <label
+        for="name"
+      >
+        Description
+      </label>
+      <textarea
+        name="description"
+        type="text"
+      >
+        desc
+      </textarea>
+      <br />
+      <button
+        id="button"
+        type="submit"
+        value=""
+      >
+        <img
+          alt="Save"
+          id="floppy"
+          src="test-file-stub"
+        />
+        Save Item
+      </button>
+    </form>
+  </div>
+</div>
+`;
