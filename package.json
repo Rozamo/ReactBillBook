@@ -48,7 +48,7 @@
     "test": "jest",
     "start": "webpack-dev-server --open",
     "build": "webpack",
-    "cust": "jest -t 'App'"
+    "cust": "jest -t 'CustomerSelect'"
   },
   "jest": {
     "moduleNameMapper": {

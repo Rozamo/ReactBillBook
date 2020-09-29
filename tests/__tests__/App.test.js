@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  render,
-  fireEvent,
-  screen,
-  waitFor,
-  cleanup,
-} from "@testing-library/react";
+import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter as Router, useHistory } from "react-router-dom";
 import App from "../../src/components/App";
 
