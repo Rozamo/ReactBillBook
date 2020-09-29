@@ -1,4 +1,7 @@
 node_modules
-.vscode/launch.json
+.vscode
 .eslintrc.js
+.eslintrc.json
 package-lock.json
+.prettierrc
+.babelrc

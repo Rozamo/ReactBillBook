@@ -1,26 +1,33 @@
 import React from "react";
+import { PropTypes } from "prop-types";
 import floppy from '../../images/floppy.png';
 import plus from '../../images/plus.png';
 
-class Button extends React.Component {
-	icon() {
-		if (this.props.name === "Save Invoice")
-			return <img src={floppy} id="floppy" alt="Save"></img>;
-		else return <img src={plus} id="floppy" alt="Save"></img>;
+function Button({name,id,cls,value,onClick}) {
+	function icon() {
+		if (name === "Save Invoice")
+			return <img src={floppy} id="floppy" alt="Save" />;
+		else return <img src={plus} id="floppy" alt="Save" />;
 	}
-	render() {
 		return (
 			<button
-				id={this.props.id}
-				className={this.props.cls}
-				value={this.props.value}
-				onClick={() => this.props.onClick()}
+				id={id}
+				className={cls}
+				value={value}
+				onClick={() => onClick()}
 			>
-				{this.icon()}
-				{this.props.name}
+				{icon()}
+				{name}
 			</button>
 		);
-	}
+}
+
+Button.propTypes={
+	name:PropTypes.string.isRequired,
+	id:PropTypes.string,
+	cls:PropTypes.string,
+	value:PropTypes.string.isRequired,
+	onClick:PropTypes.func.isRequired
 }
 
 export default Button;

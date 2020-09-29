@@ -55,5 +55,5 @@ export default function ItemsTable(props) {
 }
 
 ItemsTable.propTypes = {
-  location: PropTypes.object.isRequired,
+  location: PropTypes.objectOf(PropTypes.any).isRequired,
 };
