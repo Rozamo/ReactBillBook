@@ -53,6 +53,7 @@ export default function ItemsForm() {
           onChange={(event) => {
             setName(event.target.value);
           }}
+          required
         />
         <label htmlFor="amount">Price</label>
         <input
@@ -62,6 +63,7 @@ export default function ItemsForm() {
           onChange={(event) => {
             setAmount(event.target.value);
           }}
+          required
         />
         <label htmlFor="name">Description</label>
         <textarea

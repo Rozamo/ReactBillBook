@@ -1,8 +1,8 @@
-export default async function PostData(obj, sidebarChoice) {
+export default async function PostData(dataToPost, sidebarChoice) {
   try {
     const response = await fetch(`https://rzp-training.herokuapp.com/team2/${sidebarChoice}`, {
       method: 'POST',
-      body: JSON.stringify(obj),
+      body: JSON.stringify(dataToPost),
       headers: { 'Content-type': 'application/json; charset=UTF-8' },
     });
     const data = await response.json();

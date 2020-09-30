@@ -52,12 +52,12 @@ export default function CustomersForm() {
           </div>
           <div>
             <label htmlFor="contact">Phone</label>
-            <input value={contact} type="text" name="contact" onChange={(event) => { setContact(event.target.value); }} />
+            <input value={contact} type="text" name="contact" onChange={(event) => { setContact(event.target.value); }} required/>
           </div>
         </div>
         <label htmlFor="email">Email</label>
         <div className="cust-panel-1">
-          <input value={email} type="email" name="email" onChange={(event) => { setEmail(event.target.value); }} />
+          <input value={email} type="email" name="email" onChange={(event) => { setEmail(event.target.value); }} required/>
           <BlueButton sidebarChoice="customers" contentChoice="create" type="submit" />
         </div>
       </form>

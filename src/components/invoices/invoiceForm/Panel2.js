@@ -48,7 +48,7 @@ class Panel2 extends Component {
 }
 
 Panel2.propTypes={
-  itemList:PropTypes.arryof(any),
+  itemList:PropTypes.arrayOf(any),
   value:PropTypes.number,
   changeNotes:PropTypes.func
 }

@@ -83,10 +83,10 @@ body {
 #button {
     color: white;
     background-color: rgb(86, 85, 208);
+    color: rgba(255, 255, 255, 0.93);
     padding: 1% 1% 1% 1%;
     border-radius: 5px;
     border: none;
-    /* width: 10em; */
     min-width: 150px;
     min-height: 37px;
     position: relative;
@@ -94,10 +94,13 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 14px;
+    transition: all 0.25s ease-in-out;
 }
 
 #button:hover{
     cursor: pointer;
+    color: rgba(255, 255, 255, 1);
+    box-shadow: 0 5px 15px rgba(86, 85, 208, .4);
 }
 
 table {
