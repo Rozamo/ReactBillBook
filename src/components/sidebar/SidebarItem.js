@@ -23,7 +23,7 @@ export default function SidebarItem(props) {
   return (
     <div className={classValue}>
       <span
-        style={{minWidth: '1em'}}
+        style={{minWidth: '1em', lineHeight: '77%'}}
       >
         {renderIcon()}</span>
       {value}
