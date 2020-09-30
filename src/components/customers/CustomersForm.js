@@ -11,25 +11,18 @@ export default function CustomersForm() {
   const [email, setEmail] = useState('');
   const [isPosting, setIsPosting] = useState(false);
 
-  function isValid() {
-    if (!/^[a-z A-Z.]+$/.test(name)) {
-      alert('Name must not be blank and must contain only alphabets and/or a dot');
-      return false;
+  function validate(event) {
+    if (event.target.validity.patternMismatch || event.target.validity.tooShort) {
+      event.target.setCustomValidity('Please enter valid entry');
+      event.target.classList.add('wrong-input');
+    } else {
+      event.target.setCustomValidity('');
+      event.target.classList.remove('wrong-input');
     }
-    if (!/^\+?[0-9]+$/.test(contact) || contact.length < 10) {
-      alert('Phone number must contain numbers and/or + and must have atleast 10 characters');
-      return false;
-    }
-    if (!/^[^@]+@[^@.]+.[^@.]+$/.test(email)) {
-      alert('Enter valid email');
-      return false;
-    }
-    return true;
   }
 
   async function handleFormSubmit(event) {
     event.preventDefault();
-    if (!isValid()) return;
     setIsPosting(true);
     const dataToPost = { name, contact, email };
     const responseData = await PostData(dataToPost, 'customers');
@@ -46,17 +39,30 @@ export default function CustomersForm() {
         <div className="cust-panel-1">
           <div>
             <label htmlFor="name">Name</label>
-            <input value={name} type="text" name="name" onChange={(event) => { setName(event.target.value); }} required />
+            <input
+              value={name}
+              type="text"
+              pattern="^[a-z A-Z.]+$"
+              name="name"
+              onChange={(event) => {
+                setName(event.target.value);
+              }}
+              onKeyUp={validate}
+              required
+            />
           </div>
           <div>
             <label htmlFor="contact">Phone</label>
             <input
               value={contact}
               type="text"
+              pattern="^\+?[0-9]+$"
+              minLength="10"
               name="contact"
               onChange={(event) => {
                 setContact(event.target.value);
               }}
+              onKeyUp={validate}
               required
             />
           </div>

@@ -12,17 +12,8 @@ export default function ItemsForm() {
   const currency = 'INR';
   const [isPosting, setIsPosting] = useState(false);
 
-  function isValid() {
-    if (!/^[0-9]*.?[0-9]+$/.test(amount)) {
-      alert('Amount must be valid');
-      return false;
-    }
-    return true;
-  }
-
   async function handleFormSubmit(event) {
     event.preventDefault();
-    if (!isValid()) return;
     setIsPosting(true);
     const newAmount = Number(amount) * 100;
     const dataToPost = {

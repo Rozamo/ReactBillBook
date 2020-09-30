@@ -136,6 +136,14 @@ input, textarea {
     border-radius: 5px;
 }
 
+input.wrong-input {
+    border: 1px solid rgb(223, 92, 86);
+}
+
+input.wrong-input:focus {
+    outline: none;
+}
+
 .customer-form {
     background-color: white;
     padding: 2% 5% 5% 5%;
