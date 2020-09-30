@@ -52,6 +52,7 @@
     "test": "jest",
     "start": "webpack-dev-server --open",
     "build": "webpack",
+    "build-prod": "webpack --mode production",
     "cust": "jest -t 'CustomerSelect'"
   },
   "jest": {

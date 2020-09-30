@@ -158,6 +158,22 @@ input.wrong-input:focus {
     margin-top: 5px;
 }
 
+/* .cust-panel-1 { */
+    /* display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-top: 5px;
+} */
+
+@media screen and (max-width: 1284px) {
+    .cust-panel-1 {
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        margin-top: 5px;
+     }
+   }
+
 textarea {
     height: 45px; 
     margin-bottom: 17px;
