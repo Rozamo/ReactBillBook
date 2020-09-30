@@ -34,10 +34,8 @@ export default function CustomersForm() {
     const dataToPost = { name, contact, email };
     const responseData = await PostData(dataToPost, 'customers');
     if (responseData.statusCode === 400) alert(responseData.error.description);
-    else if (responseData.entity === 'customer' || responseData.id) {
-      setIsPosting(false);
-      history.push('/customers/list', { submitSuccess: true });
-    } else alert(responseData);
+    else if (responseData.entity === 'customer' || responseData.id) history.push('/customers/list', { submitSuccess: true });
+    else alert(responseData);
     setIsPosting(false);
   }
 
@@ -52,12 +50,28 @@ export default function CustomersForm() {
           </div>
           <div>
             <label htmlFor="contact">Phone</label>
-            <input value={contact} type="text" name="contact" onChange={(event) => { setContact(event.target.value); }} required/>
+            <input
+              value={contact}
+              type="text"
+              name="contact"
+              onChange={(event) => {
+                setContact(event.target.value);
+              }}
+              required
+            />
           </div>
         </div>
         <label htmlFor="email">Email</label>
         <div className="cust-panel-1">
-          <input value={email} type="email" name="email" onChange={(event) => { setEmail(event.target.value); }} required/>
+          <input
+            value={email}
+            type="email"
+            name="email"
+            onChange={(event) => {
+              setEmail(event.target.value);
+            }}
+            required
+          />
           <BlueButton sidebarChoice="customers" contentChoice="create" type="submit" />
         </div>
       </form>

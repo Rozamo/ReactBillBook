@@ -30,10 +30,8 @@ export default function ItemsForm() {
     };
     const responseData = await PostData(dataToPost, 'items');
     if (responseData.statusCode === 400) alert(responseData.error.description);
-    else if (responseData.entity === 'item' || responseData.id) {
-      setIsPosting(false);
-      history.push('/items/list', { submitSuccess: true });
-    } else alert(responseData);
+    else if (responseData.entity === 'item' || responseData.id) history.push('/items/list', { submitSuccess: true });
+    else alert(responseData);
     setIsPosting(false);
   }
 
