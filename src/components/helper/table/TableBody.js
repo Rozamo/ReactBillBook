@@ -22,9 +22,9 @@ export default function TableBody(items, arr, submitSuccess) {
       {items.map((item, itemIndex) => (
         <tr key={item.id}>
           {arr.map((element, arrIndex) => {
-            if (element === 'amount') return <td className={handleClassName(itemIndex, arrIndex)}>{INR.format(item[element] / 100)}</td>;
-            if (element === 'created_at') return <td className={handleClassName(itemIndex, arrIndex)}>{TransformDate(item[element])}</td>;
-            return <td className={handleClassName(itemIndex, arrIndex)}>{item[element]}</td>;
+            if (element === 'amount') return <td key={item.id+arrIndex} className={handleClassName(itemIndex, arrIndex)}>{INR.format(item[element] / 100)}</td>;
+            if (element === 'created_at') return <td key={item.id+arrIndex} className={handleClassName(itemIndex, arrIndex)}>{TransformDate(item[element])}</td>;
+            return <td key={item.id+arrIndex} className={handleClassName(itemIndex, arrIndex)}>{item[element]}</td>;
           })}
         </tr>
       ))}
