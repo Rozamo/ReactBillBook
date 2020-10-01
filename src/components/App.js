@@ -54,7 +54,7 @@ export default function App() {
             value="Invoices"
             sidebarChoice="invoices"
             classValue={'invoices'.concat(
-              sidebarChoice === 'invoices' ? ' active' : '',
+              sidebarChoice === 'invoices' ? ' active' : "",
             )}
           />
         </Link>
