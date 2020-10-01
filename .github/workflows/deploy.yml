@@ -18,9 +18,7 @@ jobs:
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
           github-token: ${{ secrets.GITHUB_TOKEN }} #Optional 
-          vercel-org-id: ${{ "team_lFCUwRm0NC0DoOhCgKgN04oa" }}  #Required
-          vercel-project-id: ${{ "QmaqusPRaHQs7jfTct7saRgG2pQrMVtv3o9EcgkFMbPhgD" }} #Required 
-          # vercel-org-id: ${{ secrets.ORG_ID}}  #Required
-          # vercel-project-id: ${{ secrets.PROJECT_ID}} #Required 
+          vercel-org-id: ${{ secrets.ORG_ID}}  #Required
+          vercel-project-id: ${{ secrets.PROJECT_ID}} #Required 
           working-directory: ./
       
