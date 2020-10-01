@@ -1,31 +1,30 @@
-import React, { useState } from 'react';
-import {
-  Switch, Route, Link, useHistory,
-} from 'react-router-dom';
-import SidebarItem from './sidebar/SidebarItem';
-import CustomersTable from './customers/CustomersTable';
-import CustomersForm from './customers/CustomersForm';
-import ItemsTable from './items/ItemsTable';
-import ItemsForm from './items/ItemsForm';
-import Invoices from './invoices/Invoices';
-import InvoiceForm from './invoices/invoiceForm/InvoiceForm';
+import React, { useState } from "react";
+import { Switch, Route, Link, useHistory } from "react-router-dom";
+import SidebarItem from "./sidebar/SidebarItem";
+import CustomersTable from "./customers/CustomersTable";
+import CustomersForm from "./customers/CustomersForm";
+import ItemsTable from "./items/ItemsTable";
+import ItemsForm from "./items/ItemsForm";
+import Invoices from "./invoices/Invoices";
+import InvoiceForm from "./invoices/invoiceForm/InvoiceForm";
 
 export default function App() {
   const param = window.location.href;
   const history = useHistory();
   const [sidebarChoice, setSidebarChoice] = useState(
-    getCurrentSidebarChoice(param),
+    getCurrentSidebarChoice(param)
   );
 
   function getCurrentSidebarChoice(path) {
-    if (path.includes('customers')) return 'customers';
-    if (path.includes('items')) return 'items';
-    if (path.includes('invoices')) return 'invoices';
-    return '';
+    if (path.includes("customers")) return "customers";
+    if (path.includes("items")) return "items";
+    if (path.includes("invoices")) return "invoices";
+    return "";
   }
 
   history.listen((location) => {
-    if (location && location.pathname) setSidebarChoice(getCurrentSidebarChoice(location.pathname));
+    if (location && location.pathname)
+      setSidebarChoice(getCurrentSidebarChoice(location.pathname));
   });
 
   return (
@@ -33,10 +32,10 @@ export default function App() {
       <div className="side-bar">
         <Link to="/customers/list">
           <SidebarItem
-            value="customers"
+            value="Customers"
             sidebarChoice="customers"
-            classValue={'customers'.concat(
-              sidebarChoice === 'customers' ? ' active' : '',
+            classValue={"customers".concat(
+              sidebarChoice === "customers" ? " active" : ""
             )}
           />
         </Link>
@@ -44,8 +43,8 @@ export default function App() {
           <SidebarItem
             value="Items"
             sidebarChoice="items"
-            classValue={'items'.concat(
-              sidebarChoice === 'items' ? ' active' : '',
+            classValue={"items".concat(
+              sidebarChoice === "items" ? " active" : ""
             )}
           />
         </Link>
@@ -53,8 +52,8 @@ export default function App() {
           <SidebarItem
             value="Invoices"
             sidebarChoice="invoices"
-            classValue={'invoices'.concat(
-              sidebarChoice === 'invoices' ? ' active' : '',
+            classValue={"invoices".concat(
+              sidebarChoice === "invoices" ? " active" : ""
             )}
           />
         </Link>
