@@ -25,6 +25,7 @@ exports[`Items form should render ItemsForm 1`] = `
       </label>
       <input
         name="name"
+        required=""
         type="text"
         value=""
       />
@@ -35,6 +36,7 @@ exports[`Items form should render ItemsForm 1`] = `
       </label>
       <input
         name="amount"
+        required=""
         type="number"
         value=""
       />
@@ -90,6 +92,7 @@ exports[`Items form should render ItemsForm 2`] = `
       </label>
       <input
         name="name"
+        required=""
         type="text"
         value="React"
       />
@@ -100,6 +103,7 @@ exports[`Items form should render ItemsForm 2`] = `
       </label>
       <input
         name="amount"
+        required=""
         type="number"
         value="20000"
       />
@@ -180,6 +184,7 @@ exports[`Items form should render ItemsForm 4`] = `
       </label>
       <input
         name="name"
+        required=""
         type="text"
         value="React"
       />
@@ -190,6 +195,7 @@ exports[`Items form should render ItemsForm 4`] = `
       </label>
       <input
         name="amount"
+        required=""
         type="number"
         value="20000"
       />

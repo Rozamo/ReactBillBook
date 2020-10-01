@@ -28,6 +28,7 @@ exports[`Customer form should render CustomerForm 1`] = `
           </label>
           <input
             name="name"
+            pattern="^[a-z A-Z.]+$"
             required=""
             type="text"
             value=""
@@ -40,7 +41,10 @@ exports[`Customer form should render CustomerForm 1`] = `
             Phone
           </label>
           <input
+            minlength="10"
             name="contact"
+            pattern="^\\\\+?[0-9]+$"
+            required=""
             type="text"
             value=""
           />
@@ -56,6 +60,7 @@ exports[`Customer form should render CustomerForm 1`] = `
       >
         <input
           name="email"
+          required=""
           type="email"
           value=""
         />
@@ -105,6 +110,7 @@ exports[`Customer form should render CustomerForm 2`] = `
           </label>
           <input
             name="name"
+            pattern="^[a-z A-Z.]+$"
             required=""
             type="text"
             value="Anm"
@@ -117,7 +123,10 @@ exports[`Customer form should render CustomerForm 2`] = `
             Phone
           </label>
           <input
+            minlength="10"
             name="contact"
+            pattern="^\\\\+?[0-9]+$"
+            required=""
             type="text"
             value="8237482734"
           />
@@ -133,6 +142,7 @@ exports[`Customer form should render CustomerForm 2`] = `
       >
         <input
           name="email"
+          required=""
           type="email"
           value="A@gmail.com"
         />
@@ -205,6 +215,7 @@ exports[`Customer form should render CustomerForm 4`] = `
           </label>
           <input
             name="name"
+            pattern="^[a-z A-Z.]+$"
             required=""
             type="text"
             value="Anm"
@@ -217,7 +228,10 @@ exports[`Customer form should render CustomerForm 4`] = `
             Phone
           </label>
           <input
+            minlength="10"
             name="contact"
+            pattern="^\\\\+?[0-9]+$"
+            required=""
             type="text"
             value="8237482734"
           />
@@ -233,6 +247,7 @@ exports[`Customer form should render CustomerForm 4`] = `
       >
         <input
           name="email"
+          required=""
           type="email"
           value="A@gmail.com"
         />
