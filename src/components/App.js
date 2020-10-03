@@ -32,7 +32,7 @@ export default function App() {
       <div className="side-bar">
         <Link to="/customers/list">
           <SidebarItem
-            value="Customers"
+            value="Customer"
             sidebarChoice="customers"
             classValue={"customers".concat(
               sidebarChoice === "customers" ? " active" : ""
