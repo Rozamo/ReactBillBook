@@ -6,7 +6,6 @@
 }
 
 body {
-    width: 100%;
     background: rgb(229, 229, 229);
     position: relative;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -15,14 +14,15 @@ body {
 .outside-box {
     display: flex;
     justify-content: flex-start;
-    padding: 25px;
+    /* padding: 25px; */
     height: 700px;
-    margin: 150px;
+    margin: 25px 150px;
+    width: 1140px;
 }
 
-@media screen and (max-width: 1090px) {
+@media only screen and (max-width: 600px) {
     .outside-box {
-        margin: 0px;
+        margin: 0;
     }
 }
 
@@ -52,7 +52,6 @@ a, a:visited, a:hover, a:active {
     justify-content: flex-start;
     align-items: center;
     transition: all 0.25s ease-in-out;
-    overflow: scroll;
 }
 
 .side-bar > a div:hover {
@@ -81,6 +80,7 @@ a, a:visited, a:hover, a:active {
     padding: 2%;
     overflow: scroll;
     box-shadow: #5750d8 5px 5px;
+    position: relative;
 }
 
 .top-panel {
@@ -92,7 +92,7 @@ a, a:visited, a:hover, a:active {
     color: white;
     background-color: rgb(86, 85, 208);
     color: rgba(255, 255, 255, 0.93);
-    padding: 1% 1% 1% 1%;
+    padding: 1%;
     border-radius: 5px;
     border: none;
     min-width: 150px;
@@ -190,8 +190,8 @@ mark.paid {
 
 #load-img{
     position: absolute;
-    top:45%;
-    left: 55%;
+    top: 50%;
+    left: 50%;
 }
 
 .item-total-tbl{
