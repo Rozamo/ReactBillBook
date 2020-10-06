@@ -130,7 +130,7 @@ class ItemPanel extends Component {
 							<tr />
 						)}
 						{this.state.selectedItems.map((item, index) => (
-							<tr key={index}>
+							<tr key={item.id}>
 								<td>{item.item.name}</td>
 								<td>
 									<input
