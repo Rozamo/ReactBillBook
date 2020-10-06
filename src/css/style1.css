@@ -16,7 +16,7 @@ body {
     justify-content: flex-start;
     /* padding: 25px; */
     height: 700px;
-    margin: 25px 150px;
+    margin: 25px auto;
     width: 1140px;
 }
 
