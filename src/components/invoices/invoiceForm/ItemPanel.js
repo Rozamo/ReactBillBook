@@ -94,11 +94,11 @@ class ItemPanel extends Component {
 							-1
 						)
 							return (
-								<option key={index} value={index}>
+								<option key={item.id} value={index}>
 									{item.name}
 								</option>
               );
-              else return <></>
+              else return null;
 					})}
 				</select>
 			</div>
@@ -136,9 +136,9 @@ class ItemPanel extends Component {
 									<input
 										id={index}
 										style={{ width: "100px" }}
-										type="text"
-										defaultValue="1"
-										value={item.quantity}
+										type="number"
+										defaultValue={item.quantity}
+										// value={item.quantity}
 										onChange={(event) => {
 											this.handleQuantityInputChange(
 												event,
